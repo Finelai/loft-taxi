@@ -1,11 +1,11 @@
-const Header = () => <>{/* Some Header Layout */}</>;
+export const Header = () => <div><h1>Loft Taxi</h1></div>;
 
-const LoginForm = () => <>{/* Login Form Layout */}</>;
+export const LoginForm = () => <div><form><input type="text"/></form></div>;
 
-const LoginPanel = () => (
+export const LoginPanel = () => (
   <div><LoginForm /></div>
 );
 
-const LoginPage = () => (
+export const LoginPage = () => (
   <><Header /><LoginPanel /></> 
 );
