@@ -1,0 +1,1 @@
+export const Header = () => <div><h1>Loft Taxi</h1></div>;
