@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import { Header } from "./components/Header";
+import { Header, LoginForm, LoginPanel, LoginPage } from "./components/Header";
 
 function App() {
   return (
