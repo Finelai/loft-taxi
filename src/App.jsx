@@ -7,13 +7,6 @@ import Profile from "./Components/Profile";
 
 import './App.css';
 
-const PAGES = {
-  login: <Login />,
-  reg: <Reg />,
-  map: <Map />,
-  profile: <Profile />
-}
-
 class App extends React.Component {
   state = { currentPage: 'login' };
 
@@ -22,12 +15,21 @@ class App extends React.Component {
   }
 
   render() {
+    const PAGES = {
+      login: <Login onChangePage={(page) => this.changePage(page)} />,
+      reg: <Reg  onChangePage={(page) => this.changePage(page)} />,
+      map: <Map />,
+      profile: <Profile />
+    }
+
+    const { currentPage } = this.state;
+
     return (
       <div className="App">
-        < Header changePage={(page) => this.changePage(page)} />
+        <Header changePage={(page) => this.changePage(page)} />
         <main>
           <section>
-            { PAGES[this.state.currentPage] }
+            { PAGES[currentPage] }
           </section>
         </main>
       </div>

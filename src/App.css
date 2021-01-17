@@ -40,3 +40,10 @@
 label {
   display: block;
 }
+
+p > button {
+  border: none;
+  background-color: transparent;
+  color: blue;
+  cursor: pointer;
+}

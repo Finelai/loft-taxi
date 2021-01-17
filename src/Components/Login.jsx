@@ -1,20 +1,20 @@
 import React from 'react';
 
 class Login extends React.Component {
-  handleSubmit = event => {
+  handleLoginSubmit = event => {
     event.preventDefault();
     const email = event.target.email.value;
     const password = event.target.password.value;
     console.log(`${email} ${password} has been login successful`);
-    this.setState({ currentPage: 'map' });
+    this.props.onChangePage('map');
   };
 
   render() {
     return (
       <div className="login">
         <h2>Вход</h2>
-        <form onSubmit={this.handleSubmit}>
-          <label htmlFor="login">
+        <form onSubmit={this.handleLoginSubmit}>
+          <label htmlFor="email">
             E-mail:
             <input name="email" type="email" />
           </label>
@@ -24,7 +24,7 @@ class Login extends React.Component {
           </label>
           <input type="submit" value="Войти" />
         </form>
-        <p>Новый пользователь? Зарегистрируйтесь</p>
+        <p>Новый пользователь? <button onClick={() => this.props.onChangePage('reg')}>Зарегистрируйтесь</button></p>
       </div>
     );
   }
