@@ -1,6 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class Login extends React.Component {
+  static propTypes = {
+    onChangePage: PropTypes.func
+  }
+
   handleLoginSubmit = event => {
     event.preventDefault();
     const email = event.target.email.value;
