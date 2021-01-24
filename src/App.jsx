@@ -23,7 +23,7 @@ class App extends React.Component {
       login: <Login onChangePage={(page) => this.changePage(page)} />,
       reg: <Reg onChangePage={(page) => this.changePage(page)} />,
       map: <Map />,
-      profile: <Profile />,
+      profile: <Profile onChangePage={(page) => this.changePage(page)} />,
     };
 
     const { currentPage } = this.state;
