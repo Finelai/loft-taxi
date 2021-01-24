@@ -5,8 +5,6 @@ import Reg from "./Components/Reg";
 import Map from "./Components/Map";
 import Profile from "./Components/Profile";
 
-import "./App.css";
-
 class App extends React.Component {
   state = { currentPage: "login" };
 
