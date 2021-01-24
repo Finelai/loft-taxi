@@ -1,5 +1,6 @@
 import React from 'react';
-import { AppBar, Toolbar, Typography, Button } from '@material-ui/core';
+import { AppBar, Toolbar, Button } from '@material-ui/core';
+import { Logo } from 'loft-taxi-mui-theme';
 
 class Header extends React.Component {
     navigateTo = (page) => {
@@ -10,9 +11,7 @@ class Header extends React.Component {
         return (
             <AppBar position="static">
                 <Toolbar>
-                    <Typography variant="h6">
-                        Loft Taxi
-                    </Typography>
+                    <Logo></Logo>
                     <Button color="inherit" onClick={() => this.navigateTo('login')}>Вход</Button>
                     <Button color="inherit" onClick={() => this.navigateTo('reg')}>Регистрация</Button>
                     <Button color="inherit" onClick={() => this.navigateTo('map')}>Карта</Button>
