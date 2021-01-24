@@ -4,12 +4,18 @@ import Login from "./Components/Login";
 import Reg from "./Components/Reg";
 import Map from "./Components/Map";
 import Profile from "./Components/Profile";
+import { withAuth } from "./Components/AuthContext";
 
 class App extends React.Component {
   state = { currentPage: "login" };
 
   changePage = (page) => {
-    this.setState({ currentPage: page });
+    // проверяем через пропс залогинен ли пользователь в переменной isLoggedIn в контексте AuthContext
+    if (this.props.isLoggedIn) {
+      this.setState({ currentPage: page });
+    } else {
+      this.setState({ currentPage: "login" });
+    }
   };
 
   render() {
@@ -33,4 +39,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default withAuth(App);
