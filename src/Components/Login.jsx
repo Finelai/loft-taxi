@@ -5,6 +5,7 @@ import { withAuth } from "./AuthContext";
 class Login extends React.Component {
   static propTypes = {
     onChangePage: PropTypes.func,
+    logIn: PropTypes.func,
   };
 
   handleLoginSubmit = (event) => {

@@ -5,6 +5,7 @@ import { withAuth } from "./AuthContext";
 export class Profile extends Component {
   static propTypes = {
     onChangePage: PropTypes.func,
+    logOut: PropTypes.func,
   };
 
   handleLogoutBtn = () => {
