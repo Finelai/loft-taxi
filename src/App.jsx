@@ -1,26 +1,30 @@
-import React from 'react';
+import React from "react";
 import Header from "./Components/Header";
 import Login from "./Components/Login";
 import Reg from "./Components/Reg";
 import Map from "./Components/Map";
 import Profile from "./Components/Profile";
-
-import './App.css';
+import { withAuth } from "./Components/AuthContext";
 
 class App extends React.Component {
-  state = { currentPage: 'login' };
+  state = { currentPage: "login" };
 
   changePage = (page) => {
-    this.setState({ currentPage: page });
-  }
+    // проверяем через пропс залогинен ли пользователь в переменной isLoggedIn в контексте AuthContext
+    if (this.props.isLoggedIn) {
+      this.setState({ currentPage: page });
+    } else {
+      this.setState({ currentPage: "login" });
+    }
+  };
 
   render() {
     const PAGES = {
       login: <Login onChangePage={(page) => this.changePage(page)} />,
-      reg: <Reg  onChangePage={(page) => this.changePage(page)} />,
+      reg: <Reg onChangePage={(page) => this.changePage(page)} />,
       map: <Map />,
-      profile: <Profile />
-    }
+      profile: <Profile onChangePage={(page) => this.changePage(page)} />,
+    };
 
     const { currentPage } = this.state;
 
@@ -28,13 +32,11 @@ class App extends React.Component {
       <div className="App">
         <Header changePage={(page) => this.changePage(page)} />
         <main>
-          <section>
-            { PAGES[currentPage] }
-          </section>
+          <section>{PAGES[currentPage]}</section>
         </main>
       </div>
     );
   }
 }
 
-export default App;
+export default withAuth(App);

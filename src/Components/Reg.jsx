@@ -1,6 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class Reg extends React.Component {
+  static propTypes = {
+    onChangePage: PropTypes.func
+  }
+
   handleRegSubmit = event => {
     event.preventDefault();
     const firstName = event.target.firstName.value;
