@@ -4,12 +4,18 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { AuthProvider } from "./Components/AuthContext";
+import { createStore } from "redux"
+import { Provider } from "react-redux";
+
+let store = createStore(loftTaxiApp);
 
 ReactDOM.render(
   <React.StrictMode>
-    <AuthProvider>
-      <App />
-    </AuthProvider>
+    <Provider store={store}>
+      <AuthProvider>
+        <App />
+      </AuthProvider>
+    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );

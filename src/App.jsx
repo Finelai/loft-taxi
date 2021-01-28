@@ -5,6 +5,7 @@ import Reg from "./Components/Reg";
 import Map from "./Components/Map";
 import Profile from "./Components/Profile";
 import { withAuth } from "./Components/AuthContext";
+import { connect } from "react-redux";
 
 class App extends React.Component {
   state = { currentPage: "login" };
