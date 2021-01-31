@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { withAuth } from "./AuthContext";
+import { connect } from "react-redux";
+import { userIsLoggedIn, logIn } from "modules/user";
 
 class Login extends React.Component {
   static propTypes = {
@@ -59,4 +60,11 @@ class Login extends React.Component {
   }
 }
 
-export default withAuth(Login);
+const getUserIsLoggedIn = state => ({
+  isLoggedIn: userIsLoggedIn(state)
+});
+
+export default connect(
+  getUserIsLoggedIn,
+  { logIn }
+)(Login);

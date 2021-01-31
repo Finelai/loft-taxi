@@ -1,11 +1,13 @@
 import React from "react";
+
 import Header from "./Components/Header";
 import Login from "./Components/Login";
 import Reg from "./Components/Reg";
 import Map from "./Components/Map";
 import Profile from "./Components/Profile";
-import { withAuth } from "./Components/AuthContext";
+
 import { connect } from "react-redux";
+import { userIsLoggedIn } from "./modules/user";
 
 class App extends React.Component {
   state = { currentPage: "login" };
@@ -40,4 +42,10 @@ class App extends React.Component {
   }
 }
 
-export default withAuth(App);
+const getUserIsLoggedIn = state => ({
+  isLoggedIn: userIsLoggedIn(state)
+});
+
+export default connect(
+  getUserIsLoggedIn
+)(App);

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { withAuth } from "./AuthContext";
+import { connect } from "react-redux";
+import { logOut } from "modules/user";
 
 export class Profile extends Component {
   static propTypes = {
@@ -23,4 +24,7 @@ export class Profile extends Component {
   }
 }
 
-export default withAuth(Profile);
+export default connect(
+  null,
+  { logOut }
+)(Profile);

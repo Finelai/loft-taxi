@@ -1,0 +1,1 @@
+export const userIsLoggedIn = (state) => (state.authReducer.isLoggedIn);
