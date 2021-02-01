@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { userIsLoggedIn, logIn } from "modules/user";
+import { userIsLoggedIn, logIn, auth } from "modules/user";
 
 class Login extends React.Component {
   static propTypes = {
@@ -16,8 +16,8 @@ class Login extends React.Component {
     const email = event.target.email.value;
     const password = event.target.password.value;
 
-    // передаем через пропс в переменную LogIn контекста AuthContext данные для входа
-    this.props.logIn(email, password);
+    const { authorize } = this.props;
+    authorize({ email, password });
     console.log(`${email} ${password} try to login in`);
 
     this.props.onChangePage("map");
@@ -64,7 +64,11 @@ const getUserIsLoggedIn = state => ({
   isLoggedIn: userIsLoggedIn(state)
 });
 
+const mapDispatchToProps = dispatch => ({
+  authorize: payload => dispatch(auth(payload))
+});
+
 export default connect(
   getUserIsLoggedIn,
-  { logIn }
+  mapDispatchToProps({logIn, auth})
 )(Login);

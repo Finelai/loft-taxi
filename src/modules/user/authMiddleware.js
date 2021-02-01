@@ -1,18 +1,5 @@
 import { logIn, auth } from "./actions";
-
-const serverLogin = async (email, password) => {
-  return fetch(
-    "https://loft-taxi.glitch.me/auth/",
-    {
-      method: 'POST',
-      body: JSON.stringify({email: email, password: password})
-    }
-  ).then(
-    res => res.json()
-  ).then(
-    data => data.success
-  )
-}
+import serverLogin from "api";
 
 export const authMiddleware = (store) => (next) => async (action) => {
   if (action.type === auth.toString()) {
@@ -23,5 +10,7 @@ export const authMiddleware = (store) => (next) => async (action) => {
     } else {
       next(action);
     }
+  } else {
+    next(action);
   }
 }
