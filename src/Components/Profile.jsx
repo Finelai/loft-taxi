@@ -5,13 +5,11 @@ import { logOut } from "modules/user";
 
 export class Profile extends Component {
   static propTypes = {
-    onChangePage: PropTypes.func,
     logOut: PropTypes.func,
   };
 
   handleLogoutBtn = () => {
     this.props.logOut();
-    this.props.onChangePage("login");
   };
 
   render() {

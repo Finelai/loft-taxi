@@ -8,34 +8,21 @@ import Profile from "./Components/Profile";
 
 import { connect } from "react-redux";
 import { userIsLoggedIn } from "./modules/user";
+import { Switch, Route } from "react-router-dom";
+import { PrivateRoute } from './PrivateRoute';
 
 class App extends React.Component {
-  state = { currentPage: "login" };
-
-  changePage = (page) => {
-    // проверяем через пропс залогинен ли пользователь в переменной isLoggedIn в контексте AuthContext
-    if (this.props.isLoggedIn) {
-      this.setState({ currentPage: page });
-    } else {
-      this.setState({ currentPage: "login" });
-    }
-  };
-
   render() {
-    const PAGES = {
-      login: <Login onChangePage={(page) => this.changePage(page)} />,
-      reg: <Reg onChangePage={(page) => this.changePage(page)} />,
-      map: <Map />,
-      profile: <Profile onChangePage={(page) => this.changePage(page)} />,
-    };
-
-    const { currentPage } = this.state;
-
     return (
       <div className="App">
-        <Header changePage={(page) => this.changePage(page)} />
+        <Header />
         <main>
-          <section>{PAGES[currentPage]}</section>
+          <Switch>
+            <Route exact path="/login" component={ Login } />
+            <Route exact path="/reg" component={ Reg } />
+            <PrivateRoute path="/map" component={ Map } />
+            <PrivateRoute path="/profile" component={ Profile } />
+          </Switch>
         </main>
       </div>
     );

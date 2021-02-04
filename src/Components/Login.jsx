@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { userIsLoggedIn, logIn, auth } from "modules/user";
+import { userIsLoggedIn, auth } from "modules/user";
+import { Link } from 'react-router-dom';
 
 class Login extends React.Component {
   static propTypes = {
-    onChangePage: PropTypes.func,
     logIn: PropTypes.func,
   };
 
@@ -19,8 +19,6 @@ class Login extends React.Component {
     const { authorize } = this.props;
     authorize({ email, password });
     console.log(`${email} ${password} try to login in`);
-
-    this.props.onChangePage("map");
   };
 
   render() {
@@ -30,9 +28,7 @@ class Login extends React.Component {
         {this.props.isLoggedIn ? (
           <div>
             <p>Вы успешно вошли в систему!</p>
-            <button onClick={this.props.onChangePage("map")}>
-              Перейти в профиль
-            </button>
+            <Link to="/profile">Перейти в профиль</Link>
           </div>
         ) : (
           <div className="login__form">
@@ -49,9 +45,7 @@ class Login extends React.Component {
             </form>
             <p>
               Новый пользователь?{" "}
-              <button onClick={() => this.props.onChangePage("reg")}>
-                Зарегистрируйтесь
-              </button>
+              <Link to="/reg">Зарегистрируйтесь</Link>
             </p>
           </div>
         )}
@@ -70,5 +64,5 @@ const mapDispatchToProps = dispatch => ({
 
 export default connect(
   getUserIsLoggedIn,
-  mapDispatchToProps({logIn, auth})
+  mapDispatchToProps
 )(Login);
