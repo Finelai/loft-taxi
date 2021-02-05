@@ -6,7 +6,8 @@ import { Link } from 'react-router-dom';
 
 class Login extends React.Component {
   static propTypes = {
-    logIn: PropTypes.func,
+    authorize: PropTypes.func,
+    isLoggedIn: PropTypes.bool,
   };
 
   handleLoginSubmit = (event) => {
@@ -18,7 +19,6 @@ class Login extends React.Component {
 
     const { authorize } = this.props;
     authorize({ email, password });
-    console.log(`${email} ${password} try to login in`);
   };
 
   render() {
