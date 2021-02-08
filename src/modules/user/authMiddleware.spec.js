@@ -5,7 +5,7 @@ import { serverLogIn } from "api";
 jest.mock("api", () => ({ serverLogIn: jest.fn(() => true) }));
 
 describe("authMiddleware", () => {
-  afterAll(jest.clearAllMocks)
+  afterAll(jest.clearAllMocks);
 
   describe("#AUTHENTICATE", () => {
     describe("with correct credentials", () => {
