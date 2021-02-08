@@ -8,9 +8,9 @@ export const authMiddleware = (store) => (next) => async (action) => {
     if (success) {
       store.dispatch(logIn());
     } else {
-      console.error('Не удалось пройти авторизацию');
+      console.error("Не удалось пройти авторизацию");
     }
   } else {
     next(action);
   }
-}
+};

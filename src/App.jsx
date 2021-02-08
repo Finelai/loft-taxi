@@ -9,7 +9,7 @@ import Profile from "./Components/Profile";
 import { connect } from "react-redux";
 import { userIsLoggedIn } from "./modules/user";
 import { Switch, Route } from "react-router-dom";
-import { PrivateRoute } from './PrivateRoute';
+import { PrivateRoute } from "./PrivateRoute";
 
 class App extends React.Component {
   render() {

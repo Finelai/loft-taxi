@@ -3,7 +3,7 @@ import { Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { userIsLoggedIn } from "./modules/user";
 
-export const PrivateRoute = connect((state) => ({
+export const PrivateRoute = connect(() => ({
   isLoggedIn: userIsLoggedIn,
 }))(({ component: Component, isLoggedIn,...rest }) => (
   <Route

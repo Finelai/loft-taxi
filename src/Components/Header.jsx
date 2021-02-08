@@ -1,5 +1,5 @@
 import React from "react";
-import { AppBar, Toolbar, Button } from "@material-ui/core";
+import { AppBar, Toolbar } from "@material-ui/core";
 import { Logo } from "loft-taxi-mui-theme";
 import { Link } from "react-router-dom";
 

@@ -1,14 +1,31 @@
-import authReducer from "./reducer";
+import authReducer, { initialState } from "./reducer";
 import { logIn, logOut } from "./actions";
+import { describe, expect, it} from "@jest/globals";
+
+const someAnotherAction = {
+  type: null
+};
 
 describe("authReducer", () => {
-  describe("default state", () => {
-    // тестируем возврат значения по умолчанию
+  describe("default state method isLoggedIn", () => {
+    // тестируем возврат значения метода isLoggedIn стейта по умолчанию
+    it("return false by default", () => {
+      console.log(someAnotherAction.type);
+      expect(authReducer(initialState, someAnotherAction)["isLoggedIn"]).toBe(false);
+    });
   });
-  describe("is logged in true", () => {
+  describe("state method isLoggedIn true", () => {
     // тестируем успешный логин
+    it("return true when login", () => {
+      console.log(logIn.type, logIn.toString());
+      expect(authReducer(initialState, logIn)["isLoggedIn"]).toBe(true);
+    });
   });
-  describe("is logged in false", () => {
+  describe("state method isLoggedIn false", () => {
     // тестируем логаут
+    it("return true when login", () => {
+      console.log(logOut.type, logOut.toString());
+      expect(authReducer(initialState, logOut)["isLoggedIn"]).toBe(false);
+    });
   });
 });

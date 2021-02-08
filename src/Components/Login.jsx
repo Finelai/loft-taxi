@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { userIsLoggedIn, auth } from "modules/user";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 class Login extends React.Component {
   static propTypes = {
