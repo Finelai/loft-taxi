@@ -16,13 +16,13 @@ describe("authReducer", () => {
   describe("state method isLoggedIn true", () => {
     // тестируем успешный логин
     it("return true when login", () => {
-      expect(authReducer(initialState, logIn)["isLoggedIn"]).toBe(true);
+      expect(authReducer(initialState, logIn())["isLoggedIn"]).toBe(true);
     });
   });
   describe("state method isLoggedIn false", () => {
     // тестируем логаут
     it("return true when login", () => {
-      expect(authReducer(initialState, logOut)["isLoggedIn"]).toBe(false);
+      expect(authReducer(initialState, logOut())["isLoggedIn"]).toBe(false);
     });
   });
 });

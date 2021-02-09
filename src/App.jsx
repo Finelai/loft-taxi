@@ -1,4 +1,5 @@
 import React from "react";
+import { ToastContainer } from "react-toastify";
 
 import Header from "./Components/Header";
 import Login from "./Components/Login";
@@ -24,6 +25,7 @@ class App extends React.Component {
             <PrivateRoute path="/profile" component={ Profile } />
           </Switch>
         </main>
+        <ToastContainer position="bottom-right" pauseOnHover />
       </div>
     );
   }

@@ -6,10 +6,11 @@ const initialState = {
 };
 
 function authReducer(state = initialState, action) {
-  switch (action.toString()) {
+  switch (action.type) {
     case logIn.toString(): {
       return {
         isLoggedIn: true
+        
       };
     }
     case logOut.toString(): {

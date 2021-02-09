@@ -9,7 +9,7 @@ const serverLogin = async (email, password) => {
   ).then(
     res => res.json()
   ).then(
-    data => data.success
+    data => data
   );
 };
 
