@@ -1,16 +1,18 @@
-import { logIn, logOut } from "./actions";
+import { logIn, logOut, saveCard } from "./actions";
 
 // объявляем стейт по умолчанию (пользователь не залогинен)
 const initialState = {
-  isLoggedIn: false
+  isLoggedIn: false,
+  userToken: "",
+  cardNumber: null
 };
 
-function authReducer(state = initialState, action) {
+function userReducer(state = initialState, action) {
   switch (action.type) {
     case logIn.toString(): {
       return {
-        isLoggedIn: true
-        
+        isLoggedIn: true,
+        userToken: action.payload
       };
     }
     case logOut.toString(): {
@@ -18,9 +20,14 @@ function authReducer(state = initialState, action) {
         isLoggedIn: false
       };
     }
+    case saveCard.toString(): {
+      return {
+        cardNumber: (action.payload).substr((action.payload).length - 4)
+      };
+    }
     default:
       return state;
   }
 }
 
-export default authReducer;
+export default userReducer;

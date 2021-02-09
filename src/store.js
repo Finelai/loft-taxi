@@ -1,13 +1,13 @@
 import { createStore, applyMiddleware } from "redux";
 import { combineReducers } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
-import authReducer, { authMiddleware } from "./modules/user";
+import userReducer, { authMiddleware, saveCardMiddleware } from "./modules/user";
 
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
-const rootReducers = combineReducers({authReducer});
-const middlewares = applyMiddleware(authMiddleware);
+const rootReducers = combineReducers({ userReducer });
+const middlewares = applyMiddleware(authMiddleware, saveCardMiddleware);
 
 const persistConfig = {
   key: "root",

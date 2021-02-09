@@ -13,4 +13,19 @@ const serverLogin = async (email, password) => {
   );
 };
 
-export default serverLogin;
+const serverSaveCard = async (cardNumber, token) => {
+  return fetch(
+    "https://loft-taxi.glitch.me/auth/",
+    {
+      method: "POST",
+      body: JSON.stringify({ cardNumber, token }),
+      headers: { "Content-Type": "application/json" }
+    }
+  ).then(
+    res => res.json()
+  ).then(
+    data => data
+  );
+};
+
+export { serverLogin, serverSaveCard };
