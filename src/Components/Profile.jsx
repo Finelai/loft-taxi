@@ -1,12 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { logOut, saveCard } from "modules/user";
+import { logOut, sendCard, getUserToken, getUserCardNumber } from "modules/user";
 
 export class Profile extends React.Component {
   static propTypes = {
     logOut: PropTypes.func,
-    cardSend: PropTypes.func
+    sendCard: PropTypes.func,
+    userToken: PropTypes.string,
+    userCard: PropTypes.number,
   };
 
   handleLogoutBtn = () => {
@@ -18,8 +20,8 @@ export class Profile extends React.Component {
 
     const cardNumber = event.target.card.value;
 
-    const { cardSend } = this.props;
-    cardSend({ cardNumber });
+    const { sendCard, userToken } = this.props;
+    sendCard({ cardNumber, userToken });
   };
 
   render() {
@@ -27,11 +29,17 @@ export class Profile extends React.Component {
       <div className="profile">
         <h2>Профиль</h2>
 
-        <form onSubmit={this.handleCardSubmit}>
-          <p>Введите данные карты:</p>
-          <input type="number" name="card"></input>
-          <input type="submit" value="Сохранить" />
-        </form>
+        {this.props.userCard ? (
+          <div>
+            Ваш номер карты: **** **** { this.props.userCard }
+          </div>
+        ) : (
+          <form onSubmit={this.handleCardSubmit}>
+            <p>Введите данные карты:</p>
+            <input type="number" name="card"></input>
+            <input type="submit" value="Сохранить" />
+          </form>
+        )}
 
         <button style={{ float: "right" }} onClick={this.handleLogoutBtn}>Выйти из профиля</button>
       </div>
@@ -39,11 +47,12 @@ export class Profile extends React.Component {
   }
 }
 
-const cardDispatchToProps = dispatch => ({
-  cardSend: payload => dispatch(saveCard(payload))
+const mapStateToProps = state => ({
+  userToken: getUserToken(state),
+  userCard: getUserCardNumber(state)
 });
 
 export default connect(
-  cardDispatchToProps,
-  { logOut }
+  mapStateToProps,
+  { logOut, sendCard }
 )(Profile);

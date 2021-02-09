@@ -8,6 +8,7 @@ const initialState = {
 };
 
 function userReducer(state = initialState, action) {
+  console.log(action.type, action.payload);
   switch (action.type) {
     case logIn.toString(): {
       return {

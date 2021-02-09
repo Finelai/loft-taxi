@@ -1,4 +1,4 @@
-import { logIn, auth, saveCard } from "./actions";
+import { logIn, auth, sendCard, saveCard } from "./actions";
 import { serverLogin, serverSaveCard } from "api";
 import { toast } from "react-toastify";
 
@@ -24,16 +24,21 @@ export const authMiddleware = (store) => (next) => async (action) => {
 };
 
 export const saveCardMiddleware = (store) => (next) => async (action) => {
-  console.log((store.getState()).userToken);
-  if(action.type === saveCard.toString() && (store.getState()).userToken != "") {
-    const { cardNumber } = action.payload;
+  if(action.type === sendCard.toString()) {
+    const { cardNumber, userToken } = action.payload;
     try {
-      const data = await serverSaveCard(cardNumber, (store.getState()).userToken);
+      console.log(`до выполнения запроса: ${cardNumber}, ${userToken}`);
+      const data = await serverSaveCard(cardNumber, userToken);
+      console.log("сразу после выполнения запроса:");
+      console.log(data);
       if (data.success) {
+        console.log(store.getState());
         store.dispatch(saveCard(cardNumber));
+        console.log(store.getState());
         toast("Карта сохранена");
       } else {
         toast.error("Не удалось сохранить карту! Попробуйте в другой раз");
+        throw new Error(`ответ сервера: ${data.error}`);
       }
     } catch (err) {
       console.log(err);

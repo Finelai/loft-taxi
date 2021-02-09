@@ -13,19 +13,16 @@ const serverLogin = async (email, password) => {
   );
 };
 
-const serverSaveCard = async (cardNumber, token) => {
+const serverSaveCard = async (cardNumber, userToken) => {
   return fetch(
-    "https://loft-taxi.glitch.me/auth/",
+    "https://loft-taxi.glitch.me/card/",
     {
       method: "POST",
-      body: JSON.stringify({ cardNumber, token }),
+      body: JSON.stringify({ cardNumber: cardNumber, expiryDate: "", cardName: "", cvc: "", token: userToken }),
       headers: { "Content-Type": "application/json" }
     }
-  ).then(
-    res => res.json()
-  ).then(
-    data => data
-  );
+  ).then((response) => response.json()
+  ).then((response) => response);
 };
 
 export { serverLogin, serverSaveCard };
