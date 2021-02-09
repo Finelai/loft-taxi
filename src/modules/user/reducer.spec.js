@@ -10,21 +10,18 @@ describe("authReducer", () => {
   describe("default state method isLoggedIn", () => {
     // тестируем возврат значения метода isLoggedIn стейта по умолчанию
     it("return false by default", () => {
-      console.log(someAnotherAction.type);
       expect(authReducer(initialState, someAnotherAction)["isLoggedIn"]).toBe(false);
     });
   });
   describe("state method isLoggedIn true", () => {
     // тестируем успешный логин
     it("return true when login", () => {
-      console.log(logIn.type, logIn.toString());
       expect(authReducer(initialState, logIn)["isLoggedIn"]).toBe(true);
     });
   });
   describe("state method isLoggedIn false", () => {
     // тестируем логаут
     it("return true when login", () => {
-      console.log(logOut.type, logOut.toString());
       expect(authReducer(initialState, logOut)["isLoggedIn"]).toBe(false);
     });
   });
