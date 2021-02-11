@@ -1,11 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { withAuth } from "./AuthContext";
+import { connect } from "react-redux";
+import { userIsLoggedIn, auth } from "modules/user";
+import { Link } from "react-router-dom";
 
 class Login extends React.Component {
   static propTypes = {
-    onChangePage: PropTypes.func,
-    logIn: PropTypes.func,
+    authorize: PropTypes.func,
+    isLoggedIn: PropTypes.bool,
   };
 
   handleLoginSubmit = (event) => {
@@ -15,11 +17,8 @@ class Login extends React.Component {
     const email = event.target.email.value;
     const password = event.target.password.value;
 
-    // передаем через пропс в переменную LogIn контекста AuthContext данные для входа
-    this.props.logIn(email, password);
-    console.log(`${email} ${password} try to login in`);
-
-    this.props.onChangePage("map");
+    const { authorize } = this.props;
+    authorize({ email, password });
   };
 
   render() {
@@ -29,9 +28,7 @@ class Login extends React.Component {
         {this.props.isLoggedIn ? (
           <div>
             <p>Вы успешно вошли в систему!</p>
-            <button onClick={this.props.onChangePage("map")}>
-              Перейти в профиль
-            </button>
+            <Link to="/profile">Перейти в профиль</Link>
           </div>
         ) : (
           <div className="login__form">
@@ -48,9 +45,7 @@ class Login extends React.Component {
             </form>
             <p>
               Новый пользователь?{" "}
-              <button onClick={() => this.props.onChangePage("reg")}>
-                Зарегистрируйтесь
-              </button>
+              <Link to="/reg">Зарегистрируйтесь</Link>
             </p>
           </div>
         )}
@@ -59,4 +54,15 @@ class Login extends React.Component {
   }
 }
 
-export default withAuth(Login);
+const getUserIsLoggedIn = state => ({
+  isLoggedIn: userIsLoggedIn(state)
+});
+
+const mapDispatchToProps = dispatch => ({
+  authorize: payload => dispatch(auth(payload))
+});
+
+export default connect(
+  getUserIsLoggedIn,
+  mapDispatchToProps
+)(Login);

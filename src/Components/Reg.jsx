@@ -1,17 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import { Link } from "react-router-dom";
 
 class Reg extends React.Component {
-  static propTypes = {
-    onChangePage: PropTypes.func
-  }
-
   handleRegSubmit = event => {
     event.preventDefault();
     const firstName = event.target.firstName.value;
     const lastName = event.target.lastName.value;
     console.log(`${firstName} ${lastName} has been register successful`);
-    this.props.onChangePage('map');
   };
 
   render() {
@@ -37,7 +32,7 @@ class Reg extends React.Component {
           </label>
           <input type="submit" value="Submit" />
         </form>
-        <p>Уже зарегистрированы? <button onClick={() => this.props.onChangePage('login')}>Войти</button></p>
+        <p>Уже зарегистрированы? <Link to="/login">Войти</Link></p>
       </div>
     );
   }
