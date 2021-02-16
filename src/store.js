@@ -26,4 +26,4 @@ const persistedStore = () => {
   return { store, persistor };
 };
 
-export { persistedStore, middlewares };
+export { persistedStore, sagaMiddleware };
