@@ -13,13 +13,13 @@ export class Reg extends React.Component {
   handleRegSubmit = event => {
     event.preventDefault();
 
-    const firstName = event.target.firstName.value;
-    const lastName = event.target.lastName.value;
+    const name = event.target.firstName.value;
+    const surname = event.target.lastName.value;
     const email = event.target.lastName.value;
     const password = event.target.lastName.value;
 
     const { reg } = this.props;
-    reg({ firstName, lastName, email, password });
+    reg({ name, surname, email, password });
   };
 
   render() {

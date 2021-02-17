@@ -4,11 +4,13 @@ import { logIn, logOut, saveCard } from "./actions";
 const initialState = {
   isLoggedIn: false,
   userToken: "",
-  cardNumber: null
+  cardNumber: null,
+  cardExpiryDate: "",
+  cardName: "",
+  cardCVC: null
 };
 
 function userReducer(state = initialState, action) {
-  console.log(action.type, action.payload);
   switch (action.type) {
     case logIn.toString(): {
       return {
@@ -23,7 +25,10 @@ function userReducer(state = initialState, action) {
     }
     case saveCard.toString(): {
       return {
-        cardNumber: (action.payload).substr((action.payload).length - 4)
+        cardNumber: action.payload.cardNumber,
+        cardExpiryDate: action.payload.expiryDate,
+        cardName: action.payload.cardName,
+        cardCVC: action.payload.cvc
       };
     }
     default:

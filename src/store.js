@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware } from "redux";
 import { combineReducers } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
-import userReducer, { saveCardMiddleware } from "./modules/user";
+import userReducer from "./modules/user";
 
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
@@ -10,7 +10,7 @@ import createSagaMiddleware from "redux-saga";
 
 const rootReducers = combineReducers({ userReducer });
 const sagaMiddleware = createSagaMiddleware();
-const middlewares = applyMiddleware(saveCardMiddleware, sagaMiddleware);
+const middlewares = applyMiddleware(sagaMiddleware);
 
 const persistConfig = {
   key: "root",
