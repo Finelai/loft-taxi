@@ -1,3 +1,18 @@
+const serverRegister = async (email, password, name, surname) => {
+  return fetch(
+    "https://loft-taxi.glitch.me/register/",
+    {
+      method: "POST",
+      body: JSON.stringify({ email, password, name, surname }),
+      headers: { "Content-Type": "application/json" }
+    }
+  ).then(
+    res => res.json()
+  ).then(
+    data => data
+  );
+};
+
 const serverLogin = async (email, password) => {
   return fetch(
     "https://loft-taxi.glitch.me/auth/",
@@ -25,4 +40,4 @@ const serverSaveCard = async (cardNumber, userToken) => {
   ).then((response) => response);
 };
 
-export { serverLogin, serverSaveCard };
+export { serverLogin, serverSaveCard, serverRegister };
