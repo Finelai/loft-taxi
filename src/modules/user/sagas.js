@@ -1,5 +1,6 @@
 import { takeEvery, call, put, all } from "redux-saga/effects";
 import { reg, auth, logIn, saveCard, sendCard, getCard } from "./actions";
+import { receiveAdressList } from "modules/map";
 import { serverRegister, serverLogin, serverSaveCard, serverGetCard } from "api";
 import { toast } from "react-toastify";
 
@@ -21,12 +22,19 @@ function* regWatcher() {
 
 // User Login
 function* loginSaga(action) {
+  // получаем email и пароль из payload
   const { email, password } = action.payload;
+  // отправляем запрос на сервер
   const data = yield call(serverLogin, email, password);
   if (data.success && data.token) {
+    // если от сервера получили статус успех и токен
+    // записываем в стейт что юзер залогинился, сохраняем его токен
     yield put(logIn(data.token));
     toast("Вы успешно вошли в систему");
+    // получаем данные карты пользователя и записываем в стейт
     yield put(getCard(data.token));
+    // получаем адреса от сервера и записываем в стейт
+    yield put(receiveAdressList);
   } else {
     toast.error("Не удалось войти в систему! Попробуйте другой логин/пароль или зарегистрируйтесь");
   }
@@ -69,6 +77,6 @@ function* getCardWatcher() {
 }
 
 
-export default function* rootSaga() {
+export default function* userSagas() {
   yield all([ regWatcher(), authWatcher(), sendCardWatcher(), getCardWatcher() ]);
 }

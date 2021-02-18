@@ -2,13 +2,14 @@ import { createStore, applyMiddleware } from "redux";
 import { combineReducers } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import userReducer from "./modules/user";
+import mapReducer from "./modules/map";
 
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
 import createSagaMiddleware from "redux-saga";
 
-const rootReducers = combineReducers({ userReducer });
+const rootReducers = combineReducers({ userReducer, mapReducer });
 const sagaMiddleware = createSagaMiddleware();
 const middlewares = applyMiddleware(sagaMiddleware);
 

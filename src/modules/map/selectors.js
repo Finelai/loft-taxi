@@ -1,0 +1,1 @@
+export const getAdressList = (state) => (state.userReducer.adressList);
