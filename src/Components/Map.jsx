@@ -7,7 +7,8 @@ import { receiveRoute, getAdressList } from "modules/map";
 
 export class Map extends Component {
   static propTypes = {
-    adressList: PropTypes.array
+    adressList: PropTypes.array,
+    receiveRoute: PropTypes.func
   };
 
   map = null;
@@ -32,6 +33,12 @@ export class Map extends Component {
 
   handleRouteSubmit = event => {
     event.preventDefault();
+
+    const address1 = event.target.address1.value;
+    const address2 = event.target.address2.value;
+
+    const { receiveRoute } = this.props;
+    receiveRoute({ address1, address2 });
   };
 
   render() {
