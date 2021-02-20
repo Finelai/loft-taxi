@@ -3,12 +3,44 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import mapboxgl from "mapbox-gl";
-import { receiveRoute, getAddressList } from "modules/map";
+import { receiveRoute, getAddressList, getMapRoute } from "modules/map";
 
 export class Map extends Component {
   static propTypes = {
     addressList: PropTypes.array,
+    mapRoute: PropTypes.array,
     receiveRoute: PropTypes.func
+  };
+
+  drawRoute = (map, coordinates) => {
+    map.flyTo({
+      center: coordinates[0],
+      zoom: 15
+    });
+  
+    map.addLayer({
+      id: "route",
+      type: "line",
+      source: {
+        type: "geojson",
+        data: {
+          type: "Feature",
+          properties: {},
+          geometry: {
+            type: "LineString",
+            coordinates
+          }
+        }
+      },
+      layout: {
+        "line-join": "round",
+        "line-cap": "round"
+      },
+      paint: {
+        "line-color": "#ffc617",
+        "line-width": 8
+      }
+    });
   };
 
   map = null;
@@ -25,6 +57,10 @@ export class Map extends Component {
       compact: true,
       attributionControl: false,
     });
+
+    if (mapRoute !== undefined && mapRoute.length !== 0) {
+      this.drawRoute(this.map, mapRoute);
+    }
   }
 
   componentWillUnmount() {
@@ -67,7 +103,8 @@ export class Map extends Component {
 }
 
 const mapStateToProps = state => ({
-  addressList: getAddressList(state)
+  addressList: getAddressList(state),
+  mapRoute: getMapRoute(state)
 });
 
 export default connect(
