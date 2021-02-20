@@ -47,14 +47,10 @@ export class Map extends Component {
         { this.props.addressList ? (
           <form onSubmit={this.handleRouteSubmit}>
             <select name="address1">
-              <option value={this.props.addressList[0]}></option>
-              <option value={this.props.addressList[1]}></option>
-              <option value={this.props.addressList[2]}></option>
+              {this.props.addressList.map((item,i) => <option key={i}>{item}</option>)}
             </select>
             <select name="address2">
-              <option value={this.props.addressList[0]}></option>
-              <option value={this.props.addressList[1]}></option>
-              <option value={this.props.addressList[2]}></option>
+              {this.props.addressList.map((item,i) => <option key={i}>{item}</option>)}
             </select>
             <input type="submit" value="Вызвать такси" />
           </form>

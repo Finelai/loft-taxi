@@ -1,17 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { logOut, sendCard, getUserToken, getUserCardNumber, getUserCardName, getUserCardCVC, getUserCardExpiryDate } from "modules/user";
+import { logOut, sendCard, getUserToken, getUserCard } from "modules/user";
 
 export class Profile extends React.Component {
   static propTypes = {
     logOut: PropTypes.func,
     sendCard: PropTypes.func,
     userToken: PropTypes.string,
-    userCard: PropTypes.number,
-    userCardName: PropTypes.string,
-    userCardExpiryDate: PropTypes.string,
-    userCardCVC: PropTypes.number
+    userCard: PropTypes.object,
   };
 
   handleLogoutBtn = () => {
@@ -36,13 +33,13 @@ export class Profile extends React.Component {
         <h2>Профиль</h2>
         <form onSubmit={this.handleCardSubmit}>
           <p>Ваша карта:</p>
-          <input type="text" name="card" value={this.props.userCard ? this.props.userCard : "Номер карты" } />
+          <input type="text" name="card" value={(this.props.userCard && this.props.userCard.number) !== undefined ? this.props.userCard.number : "Номер карты" } />
           <br/>
-          <input type="text" name="name" value={this.props.userCardName ? this.props.userCardName : "Имя держателя" } />
+          <input type="text" name="name" value={(this.props.userCard && this.props.userCard.name) ? this.props.userCard.name : "Имя держателя" } />
           <br/>
-          <input type="text" name="date" value={this.props.userCardExpiryDate ? this.props.userCardExpiryDate : "Дата окончания" } />
+          <input type="text" name="date" value={(this.props.userCard && this.props.userCard.expiryDate) ? this.props.userCard.expiryDate : "Дата окончания" } />
           <br/>
-          <input type="text" name="cvc" value={this.props.userCardCVC ? this.props.userCardCVC : "CVC код" } />
+          <input type="text" name="cvc" value={(this.props.userCard && this.props.userCard.cvc) ? this.props.userCard.cvc : "CVC код" } />
           <br/>
           <input type="submit" value="Сохранить" />
         </form>
@@ -54,10 +51,7 @@ export class Profile extends React.Component {
 
 const mapStateToProps = state => ({
   userToken: getUserToken(state),
-  userCard: getUserCardNumber(state),
-  userCardName: getUserCardName(state),
-  userCardExpiryDate: getUserCardExpiryDate(state),
-  userCardCVC: getUserCardCVC(state)
+  userCard: getUserCard(state)
 });
 
 export default connect(

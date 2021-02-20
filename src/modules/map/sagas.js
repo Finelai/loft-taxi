@@ -6,8 +6,8 @@ import { toast } from "react-toastify";
 // Get Map Address List
 function* getAddressListSaga() {
   const data = yield call(serverGetAddressList);
-  if (data.cardNumber != "") {
-    yield put(saveAddressList(data));
+  if (data.addresses !== undefined && data.addresses.length !== 0) {
+    yield put(saveAddressList(data.addresses));
     toast("Загружены доступные адреса");
   } else {
     toast.error("Доступные адреса не найдены");
@@ -24,7 +24,7 @@ function* getRoute(action) {
   const data = yield call(serverGetRoute, address1, address2);
   if (data) {
     yield put(saveRoute(data));
-    toast("Маршрут построен");
+    toast("Маршрут найден");
   } else {
     toast.error("Маршрут не найден");
   }

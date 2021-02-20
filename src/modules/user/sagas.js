@@ -64,7 +64,7 @@ function* sendCardWatcher() {
 function* getCardSaga(action) {
   const { userToken } = action.payload;
   const data = yield call(serverGetCard, userToken);
-  if (data.cardNumber != "") {
+  if (data.cardNumber !== "") {
     yield put(saveCard(data));
     toast("Данные карта получены");
   } else {
