@@ -1,1 +1,1 @@
-export const getAdressList = (state) => (state.userReducer.adressList);
+export const getAddressList = (state) => (state.userReducer.addressList);

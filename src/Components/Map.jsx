@@ -3,11 +3,11 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import mapboxgl from "mapbox-gl";
-import { receiveRoute, getAdressList } from "modules/map";
+import { receiveRoute, getAddressList } from "modules/map";
 
 export class Map extends Component {
   static propTypes = {
-    adressList: PropTypes.array,
+    addressList: PropTypes.array,
     receiveRoute: PropTypes.func
   };
 
@@ -44,17 +44,17 @@ export class Map extends Component {
   render() {
     return (
       <div className="map-wrapper">
-        { this.props.adressList ? (
+        { this.props.addressList ? (
           <form onSubmit={this.handleRouteSubmit}>
             <select name="address1">
-              <option value={this.props.adressList[0]}></option>
-              <option value={this.props.adressList[1]}></option>
-              <option value={this.props.adressList[2]}></option>
+              <option value={this.props.addressList[0]}></option>
+              <option value={this.props.addressList[1]}></option>
+              <option value={this.props.addressList[2]}></option>
             </select>
             <select name="address2">
-              <option value={this.props.adressList[0]}></option>
-              <option value={this.props.adressList[1]}></option>
-              <option value={this.props.adressList[2]}></option>
+              <option value={this.props.addressList[0]}></option>
+              <option value={this.props.addressList[1]}></option>
+              <option value={this.props.addressList[2]}></option>
             </select>
             <input type="submit" value="Вызвать такси" />
           </form>
@@ -71,7 +71,7 @@ export class Map extends Component {
 }
 
 const mapStateToProps = state => ({
-  adressList: getAdressList(state)
+  addressList: getAddressList(state)
 });
 
 export default connect(

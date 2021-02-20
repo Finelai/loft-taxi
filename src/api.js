@@ -46,7 +46,7 @@ const serverGetCard = async () => {
   ).then((response) => response);
 };
 
-const serverGetAdressList = async () => {
+const serverGetAddressList = async () => {
   return fetch("https://loft-taxi.glitch.me/addressList/").then(
     (response) => response.json()
   ).then((response) => response);
@@ -58,4 +58,4 @@ const serverGetRoute = async (address1, address2) => {
   ).then((response) => response);
 };
 
-export { serverLogin, serverSaveCard, serverGetCard, serverRegister, serverGetAdressList, serverGetRoute };
+export { serverLogin, serverSaveCard, serverGetCard, serverRegister, serverGetAddressList, serverGetRoute };

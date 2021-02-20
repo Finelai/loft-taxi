@@ -1,21 +1,21 @@
 import { takeEvery, call, put, all } from "redux-saga/effects";
-import { saveAdressList, receiveAdressList, receiveRoute, saveRoute } from "./actions";
-import { serverGetAdressList, serverGetRoute } from "api";
+import { saveAddressList, receiveAddressList, receiveRoute, saveRoute } from "./actions";
+import { serverGetAddressList, serverGetRoute } from "api";
 import { toast } from "react-toastify";
 
-// Get Map Adress List
-function* getAdressListSaga() {
-  const data = yield call(serverGetAdressList);
+// Get Map Address List
+function* getAddressListSaga() {
+  const data = yield call(serverGetAddressList);
   if (data.cardNumber != "") {
-    yield put(saveAdressList(data));
+    yield put(saveAddressList(data));
     toast("Загружены доступные адреса");
   } else {
     toast.error("Доступные адреса не найдены");
   }
 }
 
-function* getAdressListWatcher() {
-  yield takeEvery(receiveAdressList, getAdressListSaga);
+function* getAddressListWatcher() {
+  yield takeEvery(receiveAddressList, getAddressListSaga);
 }
 
 // Get Map Route
@@ -35,5 +35,5 @@ function* getRouteWatcher() {
 }
 
 export default function* mapSagas() {
-  yield all([ getAdressListWatcher(), getRouteWatcher() ]);
+  yield all([ getAddressListWatcher(), getRouteWatcher() ]);
 }

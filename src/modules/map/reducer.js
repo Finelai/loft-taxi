@@ -1,15 +1,15 @@
-import { saveAdressList, saveRoute } from "./actions";
+import { saveAddressList, saveRoute } from "./actions";
 
 const initialState = {
-  adressList: [],
+  addressList: [],
   route: []
 };
 
 function mapReducer(state = initialState, action) {
   switch (action.type) {
-    case saveAdressList.toString(): {
+    case saveAddressList.toString(): {
       return {
-        adressList: action.payload
+        addressList: action.payload
       };
     }
     case saveRoute.toString(): {

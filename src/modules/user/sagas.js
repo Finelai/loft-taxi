@@ -1,6 +1,6 @@
 import { takeEvery, call, put, all } from "redux-saga/effects";
 import { reg, auth, logIn, saveCard, sendCard, getCard } from "./actions";
-import { receiveAdressList } from "modules/map";
+import { receiveAddressList } from "modules/map";
 import { serverRegister, serverLogin, serverSaveCard, serverGetCard } from "api";
 import { toast } from "react-toastify";
 
@@ -34,7 +34,7 @@ function* loginSaga(action) {
     // получаем данные карты пользователя и записываем в стейт
     yield put(getCard(data.token));
     // получаем адреса от сервера и записываем в стейт
-    yield put(receiveAdressList);
+    yield put(receiveAddressList);
   } else {
     toast.error("Не удалось войти в систему! Попробуйте другой логин/пароль или зарегистрируйтесь");
   }
