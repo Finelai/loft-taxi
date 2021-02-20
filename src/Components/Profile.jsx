@@ -1,15 +1,21 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { logOut, sendCard, getUserToken, getUserCard } from "modules/user";
+import { logOut, sendCard, getCard, getUserToken, getUserCard } from "modules/user";
 
 export class Profile extends React.Component {
   static propTypes = {
     logOut: PropTypes.func,
     sendCard: PropTypes.func,
+    getCard: PropTypes.func,
     userToken: PropTypes.string,
-    userCard: PropTypes.object,
+    userCard: PropTypes.object
   };
+
+  componentDidMount() {
+    // получаем данные карты пользователя с сервера
+    getCard(userToken);
+  }
 
   handleLogoutBtn = () => {
     this.props.logOut();
@@ -56,5 +62,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { logOut, sendCard }
+  { logOut, sendCard, getCard }
 )(Profile);

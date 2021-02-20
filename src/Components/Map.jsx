@@ -3,12 +3,13 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import mapboxgl from "mapbox-gl";
-import { receiveRoute, getAddressList, getMapRoute } from "modules/map";
+import { receiveAddressList, receiveRoute, getAddressList, getMapRoute } from "modules/map";
 
 export class Map extends Component {
   static propTypes = {
     addressList: PropTypes.array,
     mapRoute: PropTypes.array,
+    receiveAddressList: PropTypes.func,
     receiveRoute: PropTypes.func
   };
 
@@ -58,6 +59,11 @@ export class Map extends Component {
       attributionControl: false,
     });
 
+    // получаем список адресов
+    receiveAddressList();
+  }
+
+  componentDidUpdate() {
     if (mapRoute !== undefined && mapRoute.length !== 0) {
       this.drawRoute(this.map, mapRoute);
     }
@@ -109,5 +115,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { receiveRoute }
+  { receiveAddressList, receiveRoute }
 )(Map);
