@@ -1,16 +1,28 @@
-import { loginSaga } from "./sagas";
+import { authWatcher } from "./sagas";
 import { auth } from "./actions";
 import { recordSaga } from "utils/recordSaga";
-
-jest.mock("api", () => ({ serverLogIn: jest.fn(() => true) }));
+import * as api from "api";
 
 describe("LoginSaga", () => {
   describe("USER_AUTHENTICATE", () => {
     it("authenticates through api", async () => {
+      const data = [{
+        success: true,
+        token: "sometoken"
+      }];
+
+      const serverLoginMock = jest
+        .spyOn(api, "serverLogin")
+        .mockImplementation(() => Promise.resolve({ data }));
+
       const dispatched = await recordSaga(
-        loginSaga,
-        auth("testlogin", "testpassword")
+        authWatcher,
+        auth({email:"testlogin", password: "123123"})
       );
+
+      console.log(dispatched);
+
+      expect(serverLoginMock).toHaveBeenCalledTimes(1);
 
       expect(dispatched).toEqual([
         {
