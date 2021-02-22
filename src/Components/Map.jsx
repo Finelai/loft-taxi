@@ -3,7 +3,12 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import mapboxgl from "mapbox-gl";
-import { receiveAddressList, receiveRoute, getAddressList, getMapRoute } from "modules/map";
+import {
+  receiveAddressList,
+  receiveRoute,
+  getAddressList,
+  getMapRoute,
+} from "modules/map";
 import { getUserCard } from "modules/user";
 
 export class Map extends Component {
@@ -12,15 +17,15 @@ export class Map extends Component {
     mapRoute: PropTypes.array,
     receiveAddressList: PropTypes.func,
     receiveRoute: PropTypes.func,
-    userCard: PropTypes.object
+    userCard: PropTypes.object,
   };
 
   drawRoute = (map, coordinates) => {
     map.flyTo({
       center: coordinates[0],
-      zoom: 15
+      zoom: 15,
     });
-  
+
     map.addLayer({
       id: "route",
       type: "line",
@@ -31,18 +36,18 @@ export class Map extends Component {
           properties: {},
           geometry: {
             type: "LineString",
-            coordinates
-          }
-        }
+            coordinates,
+          },
+        },
       },
       layout: {
         "line-join": "round",
-        "line-cap": "round"
+        "line-cap": "round",
       },
       paint: {
         "line-color": "#ffc617",
-        "line-width": 8
-      }
+        "line-width": 8,
+      },
     });
   };
 
@@ -61,15 +66,13 @@ export class Map extends Component {
       attributionControl: false,
     });
 
+    this.map.on("load", () => {
+      this.drawRoute(this.map, this.props.mapRoute);
+    });
+
     // получаем список адресов
     if (this.props.userCard.number) {
       receiveAddressList();
-    }
-  }
-
-  componentDidUpdate() {
-    if (this.props.mapRoute !== undefined && this.props.mapRoute.length !== 0) {
-      this.drawRoute(this.map, this.props.mapRoute);
     }
   }
 
@@ -77,7 +80,7 @@ export class Map extends Component {
     this.map.remove();
   }
 
-  handleRouteSubmit = event => {
+  handleRouteSubmit = (event) => {
     event.preventDefault();
 
     const address1 = event.target.address1.value;
@@ -87,20 +90,26 @@ export class Map extends Component {
     receiveRoute({ address1, address2 });
   };
 
-  handleAddressSelect = event => {
+  handleAddressSelect = (event) => {
     console.log(event.target);
-  }
+  };
 
   render() {
     return (
       <div className="map-wrapper">
-        { (this.props.userCard.number && this.props.addressList && this.props.addressList.length > 0) ? (
+        {this.props.userCard.number &&
+        this.props.addressList &&
+        this.props.addressList.length > 0 ? (
           <form onSubmit={this.handleRouteSubmit}>
             <select name="address1" onChange={this.handleAddressSelect}>
-              {this.props.addressList.map((item,i) => <option key={i}>{item}</option>)}
+              {this.props.addressList.map((item, i) => (
+                <option key={i}>{item}</option>
+              ))}
             </select>
             <select name="address2" onChange={this.handleAddressSelect}>
-              {this.props.addressList.map((item,i) => <option key={i}>{item}</option>)}
+              {this.props.addressList.map((item, i) => (
+                <option key={i}>{item}</option>
+              ))}
             </select>
             <input type="submit" value="Вызвать такси" />
           </form>
@@ -116,13 +125,12 @@ export class Map extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   addressList: getAddressList(state),
   mapRoute: getMapRoute(state),
-  userCard: getUserCard(state)
+  userCard: getUserCard(state),
 });
 
-export default connect(
-  mapStateToProps,
-  { receiveAddressList, receiveRoute }
-)(Map);
+export default connect(mapStateToProps, { receiveAddressList, receiveRoute })(
+  Map
+);

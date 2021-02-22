@@ -13,10 +13,10 @@ import { mapSagas } from "./modules/map";
 import { all } from "redux-saga/effects";
 
 const { store, persistor } = persistedStore();
+
 function* rootSaga() {
   yield all([ userSagas(), mapSagas() ]);
 }
-
 sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
