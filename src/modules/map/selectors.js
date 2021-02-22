@@ -1,2 +1,2 @@
-export const getAddressList = (state) => (state.userReducer.addressList);
-export const getMapRoute = (state) => (state.userReducer.route);
+export const getAddressList = (state) => (state.mapReducer.addressList);
+export const getMapRoute = (state) => (state.mapReducer.route);

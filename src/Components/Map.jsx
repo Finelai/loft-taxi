@@ -4,13 +4,15 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import mapboxgl from "mapbox-gl";
 import { receiveAddressList, receiveRoute, getAddressList, getMapRoute } from "modules/map";
+import { getUserCard } from "modules/user";
 
 export class Map extends Component {
   static propTypes = {
     addressList: PropTypes.array,
     mapRoute: PropTypes.array,
     receiveAddressList: PropTypes.func,
-    receiveRoute: PropTypes.func
+    receiveRoute: PropTypes.func,
+    userCard: PropTypes.object
   };
 
   drawRoute = (map, coordinates) => {
@@ -60,12 +62,14 @@ export class Map extends Component {
     });
 
     // получаем список адресов
-    receiveAddressList();
+    if (this.props.userCard.number) {
+      receiveAddressList();
+    }
   }
 
   componentDidUpdate() {
-    if (mapRoute !== undefined && mapRoute.length !== 0) {
-      this.drawRoute(this.map, mapRoute);
+    if (this.props.mapRoute !== undefined && this.props.mapRoute.length !== 0) {
+      this.drawRoute(this.map, this.props.mapRoute);
     }
   }
 
@@ -83,15 +87,19 @@ export class Map extends Component {
     receiveRoute({ address1, address2 });
   };
 
+  handleAddressSelect = event => {
+    console.log(event.target);
+  }
+
   render() {
     return (
       <div className="map-wrapper">
-        { this.props.addressList ? (
+        { (this.props.userCard.number && this.props.addressList && this.props.addressList.length > 0) ? (
           <form onSubmit={this.handleRouteSubmit}>
-            <select name="address1">
+            <select name="address1" onChange={this.handleAddressSelect}>
               {this.props.addressList.map((item,i) => <option key={i}>{item}</option>)}
             </select>
-            <select name="address2">
+            <select name="address2" onChange={this.handleAddressSelect}>
               {this.props.addressList.map((item,i) => <option key={i}>{item}</option>)}
             </select>
             <input type="submit" value="Вызвать такси" />
@@ -110,7 +118,8 @@ export class Map extends Component {
 
 const mapStateToProps = state => ({
   addressList: getAddressList(state),
-  mapRoute: getMapRoute(state)
+  mapRoute: getMapRoute(state),
+  userCard: getUserCard(state)
 });
 
 export default connect(

@@ -14,7 +14,9 @@ export class Profile extends React.Component {
 
   componentDidMount() {
     // получаем данные карты пользователя с сервера
-    getCard(userToken);
+    if (this.props.userToken) {
+      getCard(this.props.userToken);
+    }
   }
 
   handleLogoutBtn = () => {
@@ -39,13 +41,13 @@ export class Profile extends React.Component {
         <h2>Профиль</h2>
         <form onSubmit={this.handleCardSubmit}>
           <p>Ваша карта:</p>
-          <input type="text" name="card" value={(this.props.userCard && this.props.userCard.number) !== undefined ? this.props.userCard.number : "Номер карты" } />
+          <input type="text" name="card" placeholder="Номер карты" value={(this.props.userCard && this.props.userCard.number) ? this.props.userCard.number : null } />
           <br/>
-          <input type="text" name="name" value={(this.props.userCard && this.props.userCard.name) ? this.props.userCard.name : "Имя держателя" } />
+          <input type="text" name="name" placeholder="Имя держателя" value={(this.props.userCard && this.props.userCard.name) ? this.props.userCard.name : null } />
           <br/>
-          <input type="text" name="date" value={(this.props.userCard && this.props.userCard.expiryDate) ? this.props.userCard.expiryDate : "Дата окончания" } />
+          <input type="text" name="date" placeholder="Дата окончания" value={(this.props.userCard && this.props.userCard.expiryDate) ? this.props.userCard.expiryDate : null } />
           <br/>
-          <input type="text" name="cvc" value={(this.props.userCard && this.props.userCard.cvc) ? this.props.userCard.cvc : "CVC код" } />
+          <input type="text" name="cvc" placeholder="CVC код" value={(this.props.userCard && this.props.userCard.cvc) ? this.props.userCard.cvc : null } />
           <br/>
           <input type="submit" value="Сохранить" />
         </form>
