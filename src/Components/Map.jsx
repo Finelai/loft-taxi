@@ -18,6 +18,7 @@ export class Map extends Component {
     receiveAddressList: PropTypes.func,
     receiveRoute: PropTypes.func,
     userCard: PropTypes.object,
+    filteredAddressList: PropTypes.array
   };
 
   drawRoute = (map, coordinates) => {
@@ -91,7 +92,11 @@ export class Map extends Component {
   };
 
   handleAddressSelect = (event) => {
-    console.log(event.target);
+    if (event.target.name === "address1") {
+      this.props.filteredAddressList[0] = event.target.value;
+    } else {
+      this.props.filteredAddressList[1] = event.target.value;
+    }
   };
 
   render() {
@@ -102,12 +107,12 @@ export class Map extends Component {
         this.props.addressList.length > 0 ? (
           <form onSubmit={this.handleRouteSubmit}>
             <select name="address1" onChange={this.handleAddressSelect}>
-              {this.props.addressList.map((item, i) => (
+              {this.props.addressList.filter(item => !this.props.filteredAddressList.includes(item)).map((item, i) => (
                 <option key={i}>{item}</option>
               ))}
             </select>
             <select name="address2" onChange={this.handleAddressSelect}>
-              {this.props.addressList.map((item, i) => (
+              {this.props.addressList.filter(item => !this.props.filteredAddressList.includes(item)).map((item, i) => (
                 <option key={i}>{item}</option>
               ))}
             </select>
@@ -126,9 +131,10 @@ export class Map extends Component {
 }
 
 const mapStateToProps = (state) => ({
+  filteredAddressList: [],
   addressList: getAddressList(state),
   mapRoute: getMapRoute(state),
-  userCard: getUserCard(state),
+  userCard: getUserCard(state)
 });
 
 export default connect(mapStateToProps, { receiveAddressList, receiveRoute })(
