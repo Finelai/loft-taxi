@@ -1,3 +1,8 @@
+body, html {
+  height: 100%;
+  overflow: hidden;
+}
+
 .map-wrapper {
   position: relative;
   width: 100%;
@@ -6,8 +11,21 @@
 
 .map {
   position: absolute;
+  height: 100%;
+  z-index: 0;
   top: 0;
   right: 0;
   left: 0;
   bottom: 0;
+}
+
+.map__modal {
+  position: absolute;
+  z-index: 9999;
+  left: 30px;
+  background: white;
+  border: 1px solid lightgray;
+  border-radius: 3px;
+  padding: 15px 30px;
+  margin-top: 30px;
 }

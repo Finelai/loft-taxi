@@ -4,30 +4,44 @@ import { logIn, logOut, saveCard } from "./actions";
 const initialState = {
   isLoggedIn: false,
   userToken: "",
-  cardNumber: null
+  card: {
+    number: null,
+    name: "",
+    expiryDate: "",
+    cvc: null
+  }
 };
 
 function userReducer(state = initialState, action) {
-  console.log(action.type, action.payload);
   switch (action.type) {
     case logIn.toString(): {
       return {
+        ...state,
         isLoggedIn: true,
         userToken: action.payload
       };
     }
     case logOut.toString(): {
       return {
+        ...state,
         isLoggedIn: false
       };
     }
     case saveCard.toString(): {
       return {
-        cardNumber: (action.payload).substr((action.payload).length - 4)
+        ...state,
+        card: {
+          number: action.payload.cardNumber,
+          expiryDate: action.payload.expiryDate,
+          name: action.payload.cardName,
+          cvc: action.payload.cvc
+        }
       };
     }
     default:
-      return state;
+      return {
+        ...state
+      };
   }
 }
 
