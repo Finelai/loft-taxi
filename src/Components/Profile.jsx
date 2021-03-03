@@ -23,7 +23,7 @@ export class Profile extends React.Component {
     this.props.logOut();
   };
 
-  handleCardSubmit = (event) => {
+  handleCardSubmit = event => {
     event.preventDefault();
 
     const cardNumber = event.target.card.value;

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
@@ -11,7 +11,7 @@ import {
 } from "modules/map";
 import { getUserCard } from "modules/user";
 
-export class Map extends Component {
+export class Map extends React.Component {
   static propTypes = {
     addressList: PropTypes.array,
     mapRoute: PropTypes.array,
@@ -102,9 +102,7 @@ export class Map extends Component {
   render() {
     return (
       <div className="map-wrapper">
-        {this.props.userCard.number &&
-        this.props.addressList &&
-        this.props.addressList.length > 0 ? (
+        {this.props.userCard.number && this.props.addressList && this.props.addressList.length > 0 ? (
           <form onSubmit={this.handleRouteSubmit}>
             <select name="address1" onChange={this.handleAddressSelect}>
               {this.props.addressList.filter(item => !this.props.filteredAddressList.includes(item)).map((item, i) => (
