@@ -8,8 +8,10 @@ import { useForm } from "react-hook-form";
 const Reg = (props) => {
   const { register, handleSubmit } = useForm();
 
-  const handleRegSubmit = (data) => {
-    const { name, surname, email, password } = data;
+  const onRegSubmit = (data) => {
+    const { email, password } = data;
+    const name = data.firstName,
+      surname = data.lastName;
     const { reg } = props;
     reg({ name, surname, email, password });
   };
@@ -24,7 +26,7 @@ const Reg = (props) => {
       ) : (
         <div className="reg__form">
           <h2>Регистрация</h2>
-          <form onSubmit={handleSubmit(handleRegSubmit)}>
+          <form onSubmit={handleSubmit(onRegSubmit)}>
             <label htmlFor="firstName">
               Имя:
               <input name="firstName" type="text" ref={register} />
