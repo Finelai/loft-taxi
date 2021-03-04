@@ -20,7 +20,7 @@ function* regWatcher() {
 }
 
 // User Login
-function* loginSaga(action) {
+export function* loginSaga(action) {
   // получаем email и пароль из payload
   const { email, password } = action.payload;
   // отправляем запрос на сервер

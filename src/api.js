@@ -13,7 +13,7 @@ const serverRegister = async (email, password, name, surname) => {
   // );
 
   console.log(email, password, name, surname);
-  return {success: true, token: 12345};
+  return {success: true, token: "ab123"};
 };
 
 const serverLogin = async (email, password) => {
@@ -31,7 +31,7 @@ const serverLogin = async (email, password) => {
   // );
 
   console.log(email, password);
-  return {success: true, token: 12345};
+  return {success: true, token: "ab123"};
 };
 
 const serverSaveCard = async (userToken, cardNumber, cardName, cardExpiryDate, cardCVC) => {
