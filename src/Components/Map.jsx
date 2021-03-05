@@ -10,6 +10,7 @@ import {
   getMapRoute,
 } from "modules/map";
 import { getUserCard } from "modules/user";
+import MapForm from "./MapForm";
 
 export class Map extends React.Component {
   static propTypes = {
@@ -17,8 +18,7 @@ export class Map extends React.Component {
     mapRoute: PropTypes.array,
     receiveAddressList: PropTypes.func,
     receiveRoute: PropTypes.func,
-    userCard: PropTypes.object,
-    filteredAddressList: PropTypes.array
+    userCard: PropTypes.object
   };
 
   drawRoute = (map, coordinates) => {
@@ -72,7 +72,9 @@ export class Map extends React.Component {
     });
 
     // получаем список адресов
+    console.log(this.props.userCard);
     if (this.props.userCard.number) {
+      console.log("получаем адреса");
       receiveAddressList();
     }
   }
@@ -81,41 +83,11 @@ export class Map extends React.Component {
     this.map.remove();
   }
 
-  handleRouteSubmit = (event) => {
-    event.preventDefault();
-
-    const address1 = event.target.address1.value;
-    const address2 = event.target.address2.value;
-
-    const { receiveRoute } = this.props;
-    receiveRoute({ address1, address2 });
-  };
-
-  handleAddressSelect = (event) => {
-    if (event.target.name === "address1") {
-      this.props.filteredAddressList[0] = event.target.value;
-    } else {
-      this.props.filteredAddressList[1] = event.target.value;
-    }
-  };
-
   render() {
     return (
       <div className="map-wrapper">
         {this.props.userCard.number && this.props.addressList && this.props.addressList.length > 0 ? (
-          <form onSubmit={this.handleRouteSubmit}>
-            <select name="address1" onChange={this.handleAddressSelect}>
-              {this.props.addressList.filter(item => !this.props.filteredAddressList.includes(item)).map((item, i) => (
-                <option key={i}>{item}</option>
-              ))}
-            </select>
-            <select name="address2" onChange={this.handleAddressSelect}>
-              {this.props.addressList.filter(item => !this.props.filteredAddressList.includes(item)).map((item, i) => (
-                <option key={i}>{item}</option>
-              ))}
-            </select>
-            <input type="submit" value="Вызвать такси" />
-          </form>
+          <MapForm />
         ) : (
           <div className="map__modal">
             <p>У вас не заполнены платежные данные</p>
@@ -129,7 +101,6 @@ export class Map extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  filteredAddressList: [],
   addressList: getAddressList(state),
   mapRoute: getMapRoute(state),
   userCard: getUserCard(state)

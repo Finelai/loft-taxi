@@ -35,15 +35,18 @@ const serverLogin = async (email, password) => {
 };
 
 const serverSaveCard = async (userToken, cardNumber, cardName, cardExpiryDate, cardCVC) => {
-  return fetch(
-    "https://loft-taxi.glitch.me/card/",
-    {
-      method: "POST",
-      body: JSON.stringify({ cardNumber: cardNumber, expiryDate: cardExpiryDate, cardName: cardName, cvc: cardCVC, token: userToken }),
-      headers: { "Content-Type": "application/json" }
-    }
-  ).then((response) => response.json()
-  ).then((response) => response);
+  // return fetch(
+  //   "https://loft-taxi.glitch.me/card/",
+  //   {
+  //     method: "POST",
+  //     body: JSON.stringify({ cardNumber: cardNumber, expiryDate: cardExpiryDate, cardName: cardName, cvc: cardCVC, token: userToken }),
+  //     headers: { "Content-Type": "application/json" }
+  //   }
+  // ).then((response) => response.json()
+  // ).then((response) => response);
+
+  console.log(userToken, cardNumber, cardName, cardExpiryDate, cardCVC);
+  return {success: true};
 };
 
 const serverGetCard = async () => {
