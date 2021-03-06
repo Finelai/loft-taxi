@@ -1,7 +1,8 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
 import { AppBar, Toolbar } from "@material-ui/core";
 import { Logo } from "loft-taxi-mui-theme";
-import { Link } from "react-router-dom";
 
 class Header extends React.Component {
   render() {

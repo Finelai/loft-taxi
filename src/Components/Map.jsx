@@ -70,17 +70,19 @@ export class Map extends React.Component {
     this.map.on("load", () => {
       this.drawRoute(this.map, this.props.mapRoute);
     });
+  }
 
+  componentWillUnmount() {
+    this.map.remove();
+  }
+
+  componentDidUpdate() {
     // получаем список адресов
     console.log(this.props.userCard);
     if (this.props.userCard.number) {
       console.log("получаем адреса");
       receiveAddressList();
     }
-  }
-
-  componentWillUnmount() {
-    this.map.remove();
   }
 
   render() {

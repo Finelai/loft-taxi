@@ -12,6 +12,9 @@ import { userSagas } from "./modules/user";
 import { mapSagas } from "./modules/map";
 import { all, fork } from "redux-saga/effects";
 
+import { MuiThemeProvider } from "@material-ui/core/styles";
+import { theme } from "loft-taxi-mui-theme";
+
 const { store, persistor } = persistedStore();
 
 function* rootSaga() {
@@ -24,7 +27,9 @@ ReactDOM.render(
     <BrowserRouter>
       <Provider store={store}>
         <PersistGate persistor={persistor}>
-          <App />
+          <MuiThemeProvider theme={theme}>
+            <App />
+          </MuiThemeProvider>
         </PersistGate>
       </Provider>
     </BrowserRouter>
