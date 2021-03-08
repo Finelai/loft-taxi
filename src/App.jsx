@@ -1,11 +1,7 @@
 import React from "react";
 import { ToastContainer } from "react-toastify";
 
-import Header from "./components/Header";
-import Login from "./components/Login";
-import Reg from "./components/Reg";
-import Map from "./components/Map";
-import Profile from "./components/Profile";
+import { Header, Login, Profile, Reg, Map } from "./components";
 
 import { connect } from "react-redux";
 import { userIsLoggedIn } from "./modules/user";

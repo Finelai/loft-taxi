@@ -2,8 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { userIsLoggedIn, auth } from "modules/user";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { useForm } from "react-hook-form";
+
+import { TextField, FormLabel, Button } from "@material-ui/core";
 
 const Login = (props) => {
   const { register, handleSubmit } = useForm();
@@ -18,25 +20,18 @@ const Login = (props) => {
     <div className="login">
       <h2>Вход</h2>
       {props.isLoggedIn ? (
-        <div>
-          <p>Вы успешно вошли в систему!</p>
-          <Link to="/profile">Перейти в профиль</Link>
-        </div>
+        <Redirect to="/profile" />
       ) : (
         <div className="login__form">
           <form onSubmit={handleSubmit(onSubmit)}>
-            <label htmlFor="email">
-              E-mail:
-              <input name="email" type="email" ref={register} />
-            </label>
-            <label htmlFor="password">
-              Пароль:
-              <input name="password" type="password" ref={register} />
-            </label>
-            <input type="submit" value="Войти" />
+            <FormLabel focused>E-mail:</FormLabel>
+            <TextField name="email" type="email" inputRef={register} />
+            <FormLabel focused>Пароль:</FormLabel>
+            <TextField name="password" type="password" inputRef={register} />
+            <Button type="submit">Войти</Button>
           </form>
           <p>
-            Новый пользователь?{" "}
+            Новый пользователь?
             <Link to="/reg">Зарегистрируйтесь</Link>
           </p>
         </div>
