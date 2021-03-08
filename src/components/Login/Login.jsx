@@ -19,43 +19,35 @@ const Login = (props) => {
   };
 
   return (
-    <div className={styles.login}>
+    <Grid container className={styles.login} justify="center" alignItems="center" alignContent="center">
       {props.isLoggedIn ? (
         <Redirect to="/profile" />
       ) : (
-        <div>
-          <Paper className={styles.login__paper}>
-            <Grid container direction="column" alignContent="space-around" justify="space-around" className={styles.login__content}>
-
-              <Grid item>
-                <Typography variant="h4">Вход</Typography>
-              </Grid>
-
-              <Grid item className={styles.login__form}>
-                <form onSubmit={handleSubmit(onSubmit)}>
-                  <Grid container direction="column">
-                    <FormLabel focused>E-mail:</FormLabel>
-                    <TextField name="email" type="email" inputRef={register} className={styles.login__form__input} />
-                    <FormLabel focused>Пароль:</FormLabel>
-                    <TextField name="password" type="password" inputRef={register} className={styles.login__form__input} />
-                    <Grid container justify="flex-end" alignItems="flex-end" alignContent="flex-end">
-                      <Button type="submit" className={styles.login__form__btn}>Войти</Button>
-                    </Grid>
-                  </Grid>
-                </form>
-              </Grid>
-
-              <Grid item>
-                <p>
-                  Новый пользователь? <Link to="/reg">Зарегистрируйтесь</Link>
-                </p>
-              </Grid>
-
+        <Paper className={styles.login__paper}>
+          <Grid container direction="column" alignContent="space-around" justify="space-around" className={styles.login__content}>
+            <Grid item>
+              <Typography variant="h4">Вход</Typography>
             </Grid>
-          </Paper>
-        </div>
+            <Grid item className={styles.login__form}>
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <Grid container direction="column">
+                  <FormLabel focused>E-mail:</FormLabel>
+                  <TextField name="email" type="email" inputRef={register} className={styles.login__form__input} style={{ marginBottom: "5%" }} />
+                  <FormLabel focused>Пароль:</FormLabel>
+                  <TextField name="password" type="password" inputRef={register} className={styles.login__form__input} style={{ marginBottom: "5%" }} />
+                  <Grid container justify="flex-end" alignItems="flex-end" alignContent="flex-end">
+                    <Button type="submit" className={styles.login__form__btn}>Войти</Button>
+                  </Grid>
+                </Grid>
+              </form>
+            </Grid>
+            <Grid item>
+              <Typography variant="body2">Новый пользователь? <Link to="/reg">Зарегистрируйтесь</Link></Typography>
+            </Grid>
+          </Grid>
+        </Paper>
       )}
-    </div>
+    </Grid>
   );
 };
 

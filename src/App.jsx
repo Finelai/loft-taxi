@@ -1,7 +1,7 @@
 import React from "react";
 import { ToastContainer } from "react-toastify";
 
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import { PrivateRoute } from "./utils/PrivateRoute";
 
 import { connect } from "react-redux";
@@ -20,6 +20,9 @@ class App extends React.Component {
             <Route exact path="/reg" component={ Reg } />
             <PrivateRoute path="/map" component={ Map } />
             <PrivateRoute path="/profile" component={ Profile } />
+            <Route>
+              <Redirect to="/login" />
+            </Route>
           </Switch>
         </main>
         <ToastContainer position="bottom-right" pauseOnHover />
