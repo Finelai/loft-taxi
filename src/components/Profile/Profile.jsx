@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { logOut, sendCard, getCard, getUserToken, getUserCard } from "modules/user";
+
 import { useForm } from "react-hook-form";
+
+import { connect } from "react-redux";
+import { logOut, sendCard, getCard, getUserToken, getUserCard } from "redux/modules/user";
 
 const Profile = (props) => {
   const handleLogoutBtn = () => {

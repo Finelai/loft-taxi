@@ -1,12 +1,13 @@
 import React from "react";
 import { ToastContainer } from "react-toastify";
 
-import { Header, Login, Profile, Reg, Map } from "./components";
-
-import { connect } from "react-redux";
-import { userIsLoggedIn } from "./modules/user";
 import { Switch, Route } from "react-router-dom";
 import { PrivateRoute } from "./PrivateRoute";
+
+import { connect } from "react-redux";
+import { userIsLoggedIn } from "./redux/modules/user";
+
+import { Header, Login, Profile, Reg, Map } from "./components";
 
 class App extends React.Component {
   render() {

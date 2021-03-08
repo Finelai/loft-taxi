@@ -1,8 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { userIsLoggedIn, reg } from "modules/user";
+
+import { connect } from "react-redux";
+import { userIsLoggedIn, reg } from "redux/modules/user";
+
 import { useForm } from "react-hook-form";
 
 const Reg = (props) => {

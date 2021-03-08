@@ -1,9 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { userIsLoggedIn, auth } from "modules/user";
 import { Link, Redirect } from "react-router-dom";
 import { useForm } from "react-hook-form";
+
+import { connect } from "react-redux";
+import { userIsLoggedIn, auth } from "redux/modules/user";
 
 import { TextField, FormLabel, Button, Paper, Typography, Grid } from "@material-ui/core";
 import styles from "./Login.module.scss";

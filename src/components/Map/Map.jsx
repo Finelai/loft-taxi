@@ -8,8 +8,8 @@ import {
   receiveRoute,
   getAddressList,
   getMapRoute,
-} from "modules/map";
-import { getUserCard } from "modules/user";
+} from "redux/modules/map";
+import { getUserCard } from "redux/modules/user";
 import MapForm from "./MapForm";
 
 export class Map extends React.Component {

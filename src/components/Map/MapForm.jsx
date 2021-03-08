@@ -1,7 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
+
 import { connect } from "react-redux";
-import { getAddressList, receiveRoute } from "modules/map";
+import { getAddressList, receiveRoute } from "redux/modules/map";
+
 import { useForm } from "react-hook-form";
 
 const MapForm = (props) => {

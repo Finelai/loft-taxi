@@ -1,17 +1,19 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "styles/index.scss";
-import "react-toastify/dist/ReactToastify.css";
+
+import { BrowserRouter } from "react-router-dom";
 
 import App from "./App";
-import { Provider } from "react-redux";
-import { BrowserRouter } from "react-router-dom";
-import { persistedStore, sagaMiddleware } from "./store";
-import { PersistGate } from "redux-persist/integration/react";
-import { userSagas } from "./modules/user";
-import { mapSagas } from "./modules/map";
-import { all, fork } from "redux-saga/effects";
 
+import { Provider } from "react-redux";
+import { all, fork } from "redux-saga/effects";
+import { PersistGate } from "redux-persist/integration/react";
+import { persistedStore, sagaMiddleware } from "./redux/store";
+import { userSagas } from "./redux/modules/user";
+import { mapSagas } from "./redux/modules/map";
+
+import "styles/index.scss";
+import "react-toastify/dist/ReactToastify.css";
 import { MuiThemeProvider } from "@material-ui/core/styles";
 import { theme } from "loft-taxi-mui-theme";
 
