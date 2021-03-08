@@ -1,6 +1,6 @@
 import { takeLatest, call, put } from "redux-saga/effects";
 import { saveAddressList, receiveAddressList, receiveRoute, saveRoute } from "./actions";
-import { serverGetAddressList, serverGetRoute } from "api";
+import { serverGetAddressList, serverGetRoute } from "utils/api";
 import { toast } from "react-toastify";
 
 // Get Map Address List

@@ -1,7 +1,7 @@
 import { loginSaga } from "./sagas";
 import { auth } from "./actions";
 import { recordSaga } from "utils/recordSaga";
-import * as api from "api";
+import * as api from "utils/api";
 
 describe("LoginSaga", () => {
   describe("USER_AUTHENTICATE", () => {

@@ -1,6 +1,6 @@
 import { takeLatest, call, put } from "redux-saga/effects";
 import { reg, auth, logIn, saveCard, sendCard, getCard } from "./actions";
-import { serverRegister, serverLogin, serverSaveCard, serverGetCard } from "api";
+import { serverRegister, serverLogin, serverSaveCard, serverGetCard } from "utils/api";
 import { toast } from "react-toastify";
 
 // User Registration
