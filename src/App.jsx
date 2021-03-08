@@ -2,7 +2,7 @@ import React from "react";
 import { ToastContainer } from "react-toastify";
 
 import { Switch, Route } from "react-router-dom";
-import { PrivateRoute } from "./PrivateRoute";
+import { PrivateRoute } from "./utils/PrivateRoute";
 
 import { connect } from "react-redux";
 import { userIsLoggedIn } from "./redux/modules/user";
