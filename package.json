@@ -1,6 +1,8 @@
 {
   "name": "loft-taxi-app",
-  "version": "0.1.0",
+  "author": "Finelai",
+  "license": "MIT",
+  "version": "0.2.0",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.2",
@@ -11,6 +13,8 @@
     "history": "^5.0.0",
     "loft-taxi-mui-theme": "^1.2.0",
     "mapbox-gl": "^2.0.1",
+    "node-sass": "^4.14.1",
+    "pretty-error": "^3.0.3",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -62,6 +66,8 @@
     "eslint-plugin-react": "^7.22.0",
     "husky": "^4.3.8",
     "react-test-renderer": "^16.9.0",
-    "redux-devtools-extension": "^2.13.8"
+    "redux-devtools-extension": "^2.13.8",
+    "sass": "^1.32.8",
+    "sass-loader": "^11.0.1"
   }
 }

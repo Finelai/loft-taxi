@@ -5,7 +5,8 @@ import { userIsLoggedIn, auth } from "modules/user";
 import { Link, Redirect } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
-import { TextField, FormLabel, Button } from "@material-ui/core";
+import { TextField, FormLabel, Button, Paper, Typography, Grid } from "@material-ui/core";
+import styles from "./Login.module.scss";
 
 const Login = (props) => {
   const { register, handleSubmit } = useForm();
@@ -17,23 +18,40 @@ const Login = (props) => {
   };
 
   return (
-    <div className="login">
-      <h2>Вход</h2>
+    <div className={styles.login}>
       {props.isLoggedIn ? (
         <Redirect to="/profile" />
       ) : (
-        <div className="login__form">
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <FormLabel focused>E-mail:</FormLabel>
-            <TextField name="email" type="email" inputRef={register} />
-            <FormLabel focused>Пароль:</FormLabel>
-            <TextField name="password" type="password" inputRef={register} />
-            <Button type="submit">Войти</Button>
-          </form>
-          <p>
-            Новый пользователь?
-            <Link to="/reg">Зарегистрируйтесь</Link>
-          </p>
+        <div>
+          <Paper className={styles.login__paper}>
+            <Grid container direction="column" alignContent="space-around" justify="space-around" className={styles.login__content}>
+
+              <Grid item>
+                <Typography variant="h4">Вход</Typography>
+              </Grid>
+
+              <Grid item className={styles.login__form}>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                  <Grid container direction="column">
+                    <FormLabel focused>E-mail:</FormLabel>
+                    <TextField name="email" type="email" inputRef={register} className={styles.login__form__input} />
+                    <FormLabel focused>Пароль:</FormLabel>
+                    <TextField name="password" type="password" inputRef={register} className={styles.login__form__input} />
+                    <Grid container justify="flex-end" alignItems="flex-end" alignContent="flex-end">
+                      <Button type="submit" className={styles.login__form__btn}>Войти</Button>
+                    </Grid>
+                  </Grid>
+                </form>
+              </Grid>
+
+              <Grid item>
+                <p>
+                  Новый пользователь? <Link to="/reg">Зарегистрируйтесь</Link>
+                </p>
+              </Grid>
+
+            </Grid>
+          </Paper>
         </div>
       )}
     </div>
