@@ -14,7 +14,6 @@ const Profile = (props) => {
   const { register, handleSubmit } = useForm();
 
   const onCardSubmit = (data) => {
-    console.log(data);
     const cardNumber = data.card,
       cardName = data.cardname,
       cardExpiryDate = data.date,
@@ -34,17 +33,17 @@ const Profile = (props) => {
       <h2>Профиль</h2>
       <form onSubmit={handleSubmit(onCardSubmit)}>
         <p>Ваша карта:</p>
-        <input type="text" name="card" placeholder="Номер карты" value={(props.userCard && props.userCard.number) ? props.userCard.number : undefined } ref={register} />
+        <input type="text" name="card" placeholder="Номер карты" value={props.userCard?.number} ref={register} />
         <br/>
-        <input type="text" name="cardname" placeholder="Имя держателя" value={(props.userCard && props.userCard.name) ? props.userCard.name : undefined } ref={register} />
+        <input type="text" name="cardname" placeholder="Имя держателя" value={props.userCard?.name} ref={register} />
         <br/>
-        <input type="text" name="date" placeholder="Дата окончания" value={(props.userCard && props.userCard.expiryDate) ? props.userCard.expiryDate : undefined } ref={register} />
+        <input type="text" name="date" placeholder="Дата окончания" value={props.userCard?.expiryDate} ref={register} />
         <br/>
-        <input type="text" name="cvc" placeholder="CVC код" value={(props.userCard && props.userCard.cvc) ? props.userCard.cvc : undefined } ref={register} />
+        <input type="text" name="cvc" placeholder="CVC код" value={props.userCard?.cvc} ref={register} />
         <br/>
         <input type="submit" value="Сохранить" />
       </form>
-      <button style={{ float: "right" }} onClick={handleLogoutBtn}>Выйти из профиля</button>
+      <button onClick={handleLogoutBtn}>Выйти из профиля</button>
     </div>
   );
 };

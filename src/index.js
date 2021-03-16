@@ -14,7 +14,7 @@ import { mapSagas } from "./redux/modules/map";
 
 import "styles/index.scss";
 import "react-toastify/dist/ReactToastify.css";
-import { MuiThemeProvider } from "@material-ui/core/styles";
+import { MuiThemeProvider, StylesProvider } from "@material-ui/core/styles";
 import { theme } from "loft-taxi-mui-theme";
 
 const { store, persistor } = persistedStore();
@@ -30,7 +30,9 @@ ReactDOM.render(
       <Provider store={store}>
         <PersistGate persistor={persistor}>
           <MuiThemeProvider theme={theme}>
-            <App />
+            <StylesProvider injectFirst>
+              <App />
+            </StylesProvider>
           </MuiThemeProvider>
         </PersistGate>
       </Provider>

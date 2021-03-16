@@ -5,7 +5,6 @@ import { toast } from "react-toastify";
 
 // Get Map Address List
 function* getAddressListSaga() {
-  console.log("get address list saga");
   const data = yield call(serverGetAddressList);
   if (data.addresses !== undefined && data.addresses.length !== 0) {
     yield put(saveAddressList(data.addresses));

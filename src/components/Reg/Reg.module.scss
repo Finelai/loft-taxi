@@ -1,0 +1,11 @@
+.reg {
+  background: url("/img/login-background.jpg") 50% 50% no-repeat;
+  height: 100%;
+
+  &__form {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 500px;
+    padding: 5% 7%;
+  }
+}

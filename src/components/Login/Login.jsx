@@ -10,7 +10,7 @@ import { TextField, FormLabel, Button, Paper, Typography, Grid } from "@material
 import styles from "./Login.module.scss";
 
 const Login = (props) => {
-  const { register, handleSubmit } = useForm();
+  const { register, errors, handleSubmit } = useForm();
 
   const onSubmit = (data) => {
     const { email, password } = data;
@@ -18,35 +18,59 @@ const Login = (props) => {
     authorize({ email, password });
   };
 
+  if (props.isLoggedIn) {
+    return <Redirect to="/profile" />;
+  }
+
   return (
-    <Grid container className={styles.login} justify="center" alignItems="center" alignContent="center">
-      {props.isLoggedIn ? (
-        <Redirect to="/profile" />
-      ) : (
-        <Paper className={styles.login__paper}>
-          <Grid container direction="column" alignContent="space-around" justify="space-around" className={styles.login__content}>
-            <Grid item>
-              <Typography variant="h4">Вход</Typography>
-            </Grid>
-            <Grid item className={styles.login__form}>
-              <form onSubmit={handleSubmit(onSubmit)}>
-                <Grid container direction="column">
-                  <FormLabel focused>E-mail:</FormLabel>
-                  <TextField name="email" type="email" inputRef={register} className={styles.login__form__input} style={{ marginBottom: "5%" }} />
-                  <FormLabel focused>Пароль:</FormLabel>
-                  <TextField name="password" type="password" inputRef={register} className={styles.login__form__input} style={{ marginBottom: "5%" }} />
-                  <Grid container justify="flex-end" alignItems="flex-end" alignContent="flex-end">
-                    <Button type="submit" className={styles.login__form__btn}>Войти</Button>
-                  </Grid>
-                </Grid>
-              </form>
-            </Grid>
-            <Grid item>
-              <Typography variant="body2">Новый пользователь? <Link to="/reg">Зарегистрируйтесь</Link></Typography>
-            </Grid>
+    <Grid container className={styles.login} alignContent="center">
+      <Paper className={styles.login__paper}>
+        <Grid container direction="column" alignContent="space-around" justify="space-around" className={styles.login__content}>
+          <Grid item>
+            <Typography variant="h4">Вход</Typography>
           </Grid>
-        </Paper>
-      )}
+          <Grid item className={styles.login__form}>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <Grid container direction="column">
+                <FormLabel focused>E-mail:</FormLabel>
+                <TextField
+                  name="email"
+                  type="email"
+                  inputRef={register({
+                    required: "Введите E-mail",
+                    pattern: {
+                      value: /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+                      message: "Введите корректный E-mail",
+                    }
+                  })}
+                  className={styles.login__form__input}
+                  style={{ marginBottom: "5%" }}
+                  helperText={errors.email && errors.email.message}
+                  error={errors.email}
+                />
+                <FormLabel focused>Пароль:</FormLabel>
+                <TextField
+                  name="password"
+                  type="password"
+                  inputRef={register({
+                    required: "Введите пароль"
+                  })}
+                  className={styles.login__form__input}
+                  style={{ marginBottom: "5%" }}
+                  helperText={errors.password && errors.password.message}
+                  error={errors.password}
+                />
+                <Grid container justify="flex-end" alignItems="flex-end" alignContent="flex-end">
+                  <Button type="submit" className={styles.login__form__btn}>Войти</Button>
+                </Grid>
+              </Grid>
+            </form>
+          </Grid>
+          <Grid item>
+            <Typography variant="body2">Новый пользователь? <Link to="/reg">Зарегистрируйтесь</Link></Typography>
+          </Grid>
+        </Grid>
+      </Paper>
     </Grid>
   );
 };

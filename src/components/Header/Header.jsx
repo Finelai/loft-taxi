@@ -3,13 +3,14 @@ import { Link } from "react-router-dom";
 
 import { AppBar, Toolbar, Button, Grid } from "@material-ui/core";
 import { Logo } from "loft-taxi-mui-theme";
+import styles from "./Header.module.scss";
 
 class Header extends React.Component {
   render() {
     return (
-      <AppBar position="static" color="#ffffff">
+      <AppBar position="static" className={styles.appbar}>
         <Toolbar>
-          <Logo></Logo>
+          <Logo />
           <Grid container justify="flex-end">
             <Button component={Link} to="/login">Вход</Button>
             <Button component={Link} to="/reg">Регистрация</Button>

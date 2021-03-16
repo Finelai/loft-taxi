@@ -1,11 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 import { connect } from "react-redux";
 import { userIsLoggedIn, reg } from "redux/modules/user";
 
 import { useForm } from "react-hook-form";
+
+import { Grid, Paper, Typography, FormLabel, TextField, Button } from "@material-ui/core";
+import styles from "./Reg.module.scss";
 
 const Reg = (props) => {
   const { register, handleSubmit } = useForm();
@@ -18,39 +21,48 @@ const Reg = (props) => {
     reg({ name, surname, email, password });
   };
 
+  if (props.isLoggedIn) {
+    return <Redirect to="/profile" />;
+  }
+
   return (
-    <div className="reg">
-      {props.isLoggedIn ? (
-        <div>
-          <p>Вы успешно вошли в систему!</p>
-          <Link to="/profile">Перейти в профиль</Link>
-        </div>
-      ) : (
-        <div className="reg__form">
-          <h2>Регистрация</h2>
-          <form onSubmit={handleSubmit(onRegSubmit)}>
-            <label htmlFor="firstName">
-              Имя:
-              <input name="firstName" type="text" ref={register} />
-            </label>
-            <label htmlFor="lastName">
-              Фамилия:
-              <input name="lastName" type="text" ref={register} />
-            </label>
-            <label htmlFor="email">
-              E-mail:
-              <input name="email" type="email" ref={register} />
-            </label>
-            <label htmlFor="password">
-              Пароль:
-              <input name="password" type="password" ref={register} />
-            </label>
-            <input type="submit" value="Зарегистрировать" />
-          </form>
-          <p>Уже зарегистрированы? <Link to="/login">Войти</Link></p>
-        </div>
-      )}
-    </div>
+    <Grid container className={styles.reg} alignContent="center">
+      <Paper className={styles.reg__form}>
+        <Typography variant="h4">Регистрация</Typography>
+        <form onSubmit={handleSubmit(onRegSubmit)}>
+          <Grid container direction="column">
+            <FormLabel focused>Имя:</FormLabel>
+            <TextField
+              name="firstName"
+              type="text"
+              inputRef={register}
+            />
+            <FormLabel focused>Фамилия:</FormLabel>
+            <TextField
+              name="lastName"
+              type="text"
+              ref={register}
+            />
+            <FormLabel focused>E-mail:</FormLabel>
+            <TextField
+              name="email"
+              type="email"
+              ref={register}
+            />
+            <FormLabel focused>Пароль:</FormLabel>
+            <TextField
+              name="password"
+              type="password"
+              ref={register}
+            />
+            <Grid container justify="flex-end">
+              <Button type="submit">Зарегистрировать</Button>
+            </Grid>
+          </Grid>
+        </form>
+        <Typography variant="body2">Уже зарегистрированы? <Link to="/login">Войти</Link></Typography>
+      </Paper>
+    </Grid>
   );
 };
 

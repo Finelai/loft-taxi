@@ -78,7 +78,6 @@ export class Map extends React.Component {
 
   componentDidUpdate() {
     // получаем список адресов
-    console.log(this.props.userCard);
     if (this.props.userCard.number) {
       console.log("получаем адреса");
       receiveAddressList();
@@ -88,7 +87,7 @@ export class Map extends React.Component {
   render() {
     return (
       <div className="map-wrapper">
-        {this.props.userCard.number && this.props.addressList && this.props.addressList.length > 0 ? (
+        {this.props.userCard.number && this.props.addressList?.length > 0 ? (
           <MapForm />
         ) : (
           <div className="map__modal">
