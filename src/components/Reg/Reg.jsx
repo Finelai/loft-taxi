@@ -11,7 +11,7 @@ import { Grid, Paper, Typography, FormLabel, TextField, Button } from "@material
 import styles from "./Reg.module.scss";
 
 const Reg = (props) => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, errors } = useForm();
 
   const onRegSubmit = (data) => {
     const { email, password } = data;
@@ -28,35 +28,59 @@ const Reg = (props) => {
   return (
     <Grid container className={styles.reg} alignContent="center">
       <Paper className={styles.reg__form}>
-        <Typography variant="h4">Регистрация</Typography>
+        <Typography className={styles.reg__form_title} variant="h4">Регистрация</Typography>
         <form onSubmit={handleSubmit(onRegSubmit)}>
           <Grid container direction="column">
             <FormLabel focused>Имя:</FormLabel>
             <TextField
+              className={styles.reg__form__input}
               name="firstName"
               type="text"
-              inputRef={register}
+              inputRef={register({
+                required: "Введите имя"
+              })}
+              helperText={errors.firstName && errors.firstName.message}
+              error={errors.firstName}
             />
             <FormLabel focused>Фамилия:</FormLabel>
             <TextField
+              className={styles.reg__form__input}
               name="lastName"
               type="text"
-              ref={register}
+              inputRef={register({
+                required: "Введите фамилию"
+              })}
+              helperText={errors.lastName && errors.lastName.message}
+              error={errors.lastName}
             />
             <FormLabel focused>E-mail:</FormLabel>
             <TextField
+              className={styles.reg__form__input}
               name="email"
               type="email"
-              ref={register}
+              inputRef={register({
+                required: "Введите E-mail",
+                pattern: {
+                  value: /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+                  message: "Введите корректный E-mail",
+                }
+              })}
+              helperText={errors.email && errors.email.message}
+              error={errors.email}
             />
             <FormLabel focused>Пароль:</FormLabel>
             <TextField
+              className={styles.reg__form__input}
               name="password"
               type="password"
-              ref={register}
+              inputRef={register({
+                required: "Введите password"
+              })}
+              helperText={errors.password && errors.password.message}
+              error={errors.password}
             />
             <Grid container justify="flex-end">
-              <Button type="submit">Зарегистрировать</Button>
+              <Button className={styles.reg__form__btn} type="submit">Зарегистрировать</Button>
             </Grid>
           </Grid>
         </form>

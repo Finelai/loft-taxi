@@ -44,7 +44,6 @@ const Login = (props) => {
                     }
                   })}
                   className={styles.login__form__input}
-                  style={{ marginBottom: "5%" }}
                   helperText={errors.email && errors.email.message}
                   error={errors.email}
                 />
@@ -56,7 +55,6 @@ const Login = (props) => {
                     required: "Введите пароль"
                   })}
                   className={styles.login__form__input}
-                  style={{ marginBottom: "5%" }}
                   helperText={errors.password && errors.password.message}
                   error={errors.password}
                 />
