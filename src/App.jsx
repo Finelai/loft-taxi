@@ -1,16 +1,13 @@
 import React from "react";
 import { ToastContainer } from "react-toastify";
 
-import Header from "./Components/Header";
-import Login from "./Components/Login";
-import Reg from "./Components/Reg";
-import Map from "./Components/Map";
-import Profile from "./Components/Profile";
+import { Switch, Route, Redirect } from "react-router-dom";
+import { PrivateRoute } from "./utils/PrivateRoute";
 
 import { connect } from "react-redux";
-import { userIsLoggedIn } from "./modules/user";
-import { Switch, Route } from "react-router-dom";
-import { PrivateRoute } from "./PrivateRoute";
+import { userIsLoggedIn } from "./redux/modules/user";
+
+import { Header, Login, Profile, Reg, Map } from "./components";
 
 class App extends React.Component {
   render() {
@@ -23,6 +20,9 @@ class App extends React.Component {
             <Route exact path="/reg" component={ Reg } />
             <PrivateRoute path="/map" component={ Map } />
             <PrivateRoute path="/profile" component={ Profile } />
+            <Route>
+              <Redirect to="/login" />
+            </Route>
           </Switch>
         </main>
         <ToastContainer position="bottom-right" pauseOnHover />

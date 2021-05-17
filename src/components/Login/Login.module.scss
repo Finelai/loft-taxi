@@ -1,0 +1,36 @@
+@import "styles/vars";
+
+.login {
+  background: url("/img/login-background.jpg") 50% 50% no-repeat;
+  height: 100%;
+
+  &__paper {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 500px;
+  }
+
+  &__content {
+    padding: 5% 7%;
+  }
+
+  &__form {
+    form {
+      margin: 7% 0 15% 0;
+    }
+
+    &__input {
+      margin-bottom: 5%;
+    }
+
+    &__btn {
+      background-color: $colorPrimary;
+      padding-left: 10%;
+      padding-right: 10%;
+
+      &:hover {
+        background-color: darken($colorPrimary, 10%);
+      }
+    }
+  }
+}

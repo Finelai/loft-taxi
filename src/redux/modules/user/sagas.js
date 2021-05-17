@@ -1,6 +1,6 @@
-import { takeEvery, call, put, all } from "redux-saga/effects";
+import { takeLatest, call, put } from "redux-saga/effects";
 import { reg, auth, logIn, saveCard, sendCard, getCard } from "./actions";
-import { serverRegister, serverLogin, serverSaveCard, serverGetCard } from "api";
+import { serverRegister, serverLogin, serverSaveCard, serverGetCard } from "utils/api";
 import { toast } from "react-toastify";
 
 // User Registration
@@ -15,12 +15,8 @@ function* regSaga(action) {
   }
 }
 
-function* regWatcher() {
-  yield takeEvery(reg, regSaga);
-}
-
 // User Login
-function* loginSaga(action) {
+export function* loginSaga(action) {
   // получаем email и пароль из payload
   const { email, password } = action.payload;
   // отправляем запрос на сервер
@@ -36,10 +32,6 @@ function* loginSaga(action) {
   }
 }
 
-export function* authWatcher() {
-  yield takeEvery(auth, loginSaga);
-}
-
 // Send User Card
 function* sendCardSaga(action) {
   const { userToken, cardNumber, cardName, cardExpiryDate, cardCVC } = action.payload;
@@ -50,10 +42,6 @@ function* sendCardSaga(action) {
   } else {
     toast.error("Не удалось сохранить карту! Попробуйте в другой раз");
   }
-}
-
-function* sendCardWatcher() {
-  yield takeEvery(sendCard, sendCardSaga);
 }
 
 // Get User Card
@@ -68,11 +56,9 @@ function* getCardSaga(action) {
   }
 }
 
-function* getCardWatcher() {
-  yield takeEvery(getCard, getCardSaga);
-}
-
-
 export default function* userSagas() {
-  yield all([ regWatcher(), authWatcher(), sendCardWatcher(), getCardWatcher() ]);
+  yield takeLatest(reg, regSaga);
+  yield takeLatest(auth, loginSaga);
+  yield takeLatest(sendCard, sendCardSaga);
+  yield takeLatest(getCard, getCardSaga);
 }

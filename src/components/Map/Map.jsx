@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
@@ -8,17 +8,17 @@ import {
   receiveRoute,
   getAddressList,
   getMapRoute,
-} from "modules/map";
-import { getUserCard } from "modules/user";
+} from "redux/modules/map";
+import { getUserCard } from "redux/modules/user";
+import MapForm from "./MapForm";
 
-export class Map extends Component {
+export class Map extends React.Component {
   static propTypes = {
     addressList: PropTypes.array,
     mapRoute: PropTypes.array,
     receiveAddressList: PropTypes.func,
     receiveRoute: PropTypes.func,
-    userCard: PropTypes.object,
-    filteredAddressList: PropTypes.array
+    userCard: PropTypes.object
   };
 
   drawRoute = (map, coordinates) => {
@@ -70,54 +70,25 @@ export class Map extends Component {
     this.map.on("load", () => {
       this.drawRoute(this.map, this.props.mapRoute);
     });
-
-    // получаем список адресов
-    if (this.props.userCard.number) {
-      receiveAddressList();
-    }
   }
 
   componentWillUnmount() {
     this.map.remove();
   }
 
-  handleRouteSubmit = (event) => {
-    event.preventDefault();
-
-    const address1 = event.target.address1.value;
-    const address2 = event.target.address2.value;
-
-    const { receiveRoute } = this.props;
-    receiveRoute({ address1, address2 });
-  };
-
-  handleAddressSelect = (event) => {
-    if (event.target.name === "address1") {
-      this.props.filteredAddressList[0] = event.target.value;
-    } else {
-      this.props.filteredAddressList[1] = event.target.value;
+  componentDidUpdate() {
+    // получаем список адресов
+    if (this.props.userCard.number) {
+      console.log("получаем адреса");
+      receiveAddressList();
     }
-  };
+  }
 
   render() {
     return (
       <div className="map-wrapper">
-        {this.props.userCard.number &&
-        this.props.addressList &&
-        this.props.addressList.length > 0 ? (
-          <form onSubmit={this.handleRouteSubmit}>
-            <select name="address1" onChange={this.handleAddressSelect}>
-              {this.props.addressList.filter(item => !this.props.filteredAddressList.includes(item)).map((item, i) => (
-                <option key={i}>{item}</option>
-              ))}
-            </select>
-            <select name="address2" onChange={this.handleAddressSelect}>
-              {this.props.addressList.filter(item => !this.props.filteredAddressList.includes(item)).map((item, i) => (
-                <option key={i}>{item}</option>
-              ))}
-            </select>
-            <input type="submit" value="Вызвать такси" />
-          </form>
+        {this.props.userCard.number && this.props.addressList?.length > 0 ? (
+          <MapForm />
         ) : (
           <div className="map__modal">
             <p>У вас не заполнены платежные данные</p>
@@ -131,7 +102,6 @@ export class Map extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  filteredAddressList: [],
   addressList: getAddressList(state),
   mapRoute: getMapRoute(state),
   userCard: getUserCard(state)
