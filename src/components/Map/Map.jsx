@@ -69,6 +69,12 @@ export class Map extends React.Component {
 
     this.map.on("load", () => {
       this.drawRoute(this.map, this.props.mapRoute);
+      console.log(`номер карты: ${this.props.userCard.number}`);
+      // получаем список адресов
+      if (this.props.userCard.number) {
+        console.log("получаем адреса");
+        receiveAddressList();
+      }
     });
   }
 
@@ -77,6 +83,7 @@ export class Map extends React.Component {
   }
 
   componentDidUpdate() {
+    console.log(`номер карты: ${this.props.userCard.number}`);
     // получаем список адресов
     if (this.props.userCard.number) {
       console.log("получаем адреса");

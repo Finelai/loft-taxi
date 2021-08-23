@@ -21,7 +21,6 @@ export function* loginSaga(action) {
   const { email, password } = action.payload;
   // отправляем запрос на сервер
   const data = yield call(serverLogin, email, password);
-  console.log(data);
   if (data.success && data.token) {
     // если от сервера получили статус успех и токен
     // записываем в стейт что юзер залогинился, сохраняем его токен

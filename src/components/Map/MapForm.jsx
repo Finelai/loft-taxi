@@ -26,13 +26,13 @@ const MapForm = (props) => {
   return (
     <form onSubmit={handleSubmit(onRouteSubmit)}>
       <select name="address1" onChange={handleAddressSelect} ref={register}>
-        {props.addressList.filter(item => !props.filteredAddressList.includes(item)).map((item, i) => (
-          <option key={i}>{item}</option>
+        {props.addressList.filter(item => !props.filteredAddressList.includes(item)).map((item) => (
+          <option key={item}>{item}</option>
         ))}
       </select>
       <select name="address2" onChange={handleAddressSelect} ref={register}>
-        {props.addressList.filter(item => !props.filteredAddressList.includes(item)).map((item, i) => (
-          <option key={i}>{item}</option>
+        {props.addressList.filter(item => !props.filteredAddressList.includes(item)).map((item) => (
+          <option key={item}>{item}</option>
         ))}
       </select>
       <input type="submit" value="Вызвать такси" />

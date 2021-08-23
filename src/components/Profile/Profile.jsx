@@ -33,13 +33,13 @@ const Profile = (props) => {
       <h2>Профиль</h2>
       <form onSubmit={handleSubmit(onCardSubmit)}>
         <p>Ваша карта:</p>
-        <input type="text" name="card" placeholder="Номер карты" value={props.userCard?.number} ref={register} />
+        <input type="text" name="card" placeholder="Номер карты" defaultValue={props.userCard?.number} ref={register} />
         <br/>
-        <input type="text" name="cardname" placeholder="Имя держателя" value={props.userCard?.name} ref={register} />
+        <input type="text" name="cardname" placeholder="Имя держателя" defaultValue={props.userCard?.name} ref={register} />
         <br/>
-        <input type="text" name="date" placeholder="Дата окончания" value={props.userCard?.expiryDate} ref={register} />
+        <input type="text" name="date" placeholder="Дата окончания" defaultValue={props.userCard?.expiryDate} ref={register} />
         <br/>
-        <input type="text" name="cvc" placeholder="CVC код" value={props.userCard?.cvc} ref={register} />
+        <input type="text" name="cvc" placeholder="CVC код" defaultValue={props.userCard?.cvc} ref={register} />
         <br/>
         <input type="submit" value="Сохранить" />
       </form>
